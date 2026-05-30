@@ -1,1 +1,1145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ECA Creciendo Juntos — Servicios Socioambientales en Tunja, Boyacá. Reciclaje, abono orgánico, reforestación y más. Marca Soy Boyacá · Basura Cero LATAM." />
+  <title>ECA Creciendo Juntos · Servicios Socioambientales · Tunja</title>
 
+  <!-- Tipografías: Fraunces (display orgánico, con alma) + Mulish (cuerpo limpio) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Mulish:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ======================================================
+       VARIABLES — Verde Bosque + Beige Arena
+    ====================================================== */
+    :root {
+      --bosque:         #1B3A2D;   /* verde muy oscuro — fondo hero */
+      --bosque-medio:   #254D3C;   /* verde medio — secciones alternas */
+      --bosque-suave:   #3D6B55;   /* verde suave — bordes, hover */
+      --verde-vida:     #4A8C62;   /* verde acento principal */
+      --verde-claro:    #6DB888;   /* verde claro — highlights */
+      --beige-arena:    #F5EDD8;   /* beige principal */
+      --beige-suave:    #EDE3C8;   /* beige oscuro */
+      --beige-fondo:    #FAF6EC;   /* fondo secciones claras */
+      --arena-gris:     #A89880;   /* texto secundario sobre claro */
+      --tierra:         #7A5C3A;   /* acento tierra / madera */
+      --blanco-hoja:    #F0F8F0;   /* blanco con tinte verde */
+      --texto-oscuro:   #1A2A1F;   /* texto principal sobre claro */
+
+      --fuente-display: 'Fraunces', Georgia, serif;
+      --fuente-cuerpo:  'Mulish', sans-serif;
+      --transicion:     0.3s ease;
+      --max-ancho:      1080px;
+      --radio:          4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--beige-fondo);
+      color: var(--texto-oscuro);
+      font-family: var(--fuente-cuerpo);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ======================================================
+       UTILIDADES
+    ====================================================== */
+    .contenedor {
+      width: 92%;
+      max-width: var(--max-ancho);
+      margin-inline: auto;
+    }
+
+    .etiqueta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--verde-vida);
+    }
+
+    .etiqueta::before {
+      content: '';
+      width: 18px; height: 1px;
+      background: var(--verde-vida);
+    }
+
+    .separador {
+      width: 40px; height: 2px;
+      background: var(--verde-vida);
+      border-radius: 2px;
+      margin: 1.25rem 0;
+    }
+
+    .separador--centro { margin-inline: auto; }
+
+    /* ======================================================
+       NAV
+    ====================================================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      background: rgba(27,58,45,0.97);
+      border-bottom: 1px solid rgba(109,184,136,0.15);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav__nombre {
+      font-family: var(--fuente-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--beige-arena);
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+    }
+
+    .nav__slogan {
+      font-family: var(--fuente-display);
+      font-size: 0.65rem;
+      font-style: italic;
+      color: var(--verde-claro);
+      letter-spacing: 0.04em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,0.6);
+      transition: color var(--transicion);
+    }
+
+    .nav__links a:hover { color: var(--verde-claro); }
+
+    .nav__volver {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,0.45);
+      transition: color var(--transicion);
+    }
+
+    .nav__volver:hover { color: var(--verde-claro); }
+    .nav__volver svg { width: 10px; height: 10px; }
+
+    @media (max-width: 640px) {
+      .nav__links { display: none; }
+    }
+
+    /* ======================================================
+       HERO — oscuro, impactante
+    ====================================================== */
+    .hero {
+      background: var(--bosque);
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    /* Patrón de hojas en SVG inline */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 70% 30%, rgba(74,140,98,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(109,184,136,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Líneas orgánicas de fondo */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 80px;
+      background: var(--beige-fondo);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+
+    .hero__texto {
+      padding: 4rem 0 6rem;
+      position: relative;
+      z-index: 2;
+      animation: subirEntrar 0.9s ease both;
+    }
+
+    .hero__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--beige-arena);
+      margin: 1rem 0;
+    }
+
+    .hero__titulo .verde { color: var(--verde-claro); }
+
+    .hero__slogan {
+      font-family: var(--fuente-display);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(245,237,216,0.75);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .hero__desc {
+      font-size: 0.9rem;
+      color: rgba(245,237,216,0.55);
+      max-width: 420px;
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero__ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Panel derecho con logo */
+    .hero__panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem 6rem;
+      position: relative;
+      z-index: 2;
+      animation: subirEntrar 1s ease 0.2s both;
+    }
+
+    .hero__logo-wrap {
+      position: relative;
+      width: min(280px, 65vw);
+    }
+
+    /* Círculo de brillo detrás del logo */
+    .hero__logo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle, rgba(109,184,136,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero__logo-img {
+      width: 100%;
+      border-radius: 50%;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 8px 32px rgba(0,0,0,0.35));
+    }
+
+    /* Badges de certificaciones */
+    .hero__certs {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .cert-badge {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      padding: 0.3rem 0.7rem;
+      border: 1px solid rgba(109,184,136,0.3);
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ======================================================
+       BOTONES
+    ====================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: var(--radio);
+      cursor: pointer;
+      border: none;
+      transition: all var(--transicion);
+    }
+
+    .btn--verde {
+      background: var(--verde-vida);
+      color: #fff;
+    }
+
+    .btn--verde:hover {
+      background: var(--verde-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74,140,98,0.4);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--beige-arena);
+      border: 1px solid rgba(245,237,216,0.25);
+    }
+
+    .btn--outline:hover {
+      border-color: var(--verde-claro);
+      color: var(--verde-claro);
+    }
+
+    .btn--whatsapp {
+      background: #1B3A2A;
+      color: #4ade80;
+      border: 1px solid rgba(74,222,128,0.25);
+    }
+
+    .btn--whatsapp:hover {
+      background: #224a36;
+      box-shadow: 0 6px 20px rgba(74,222,128,0.15);
+    }
+
+    .btn--oscuro {
+      background: var(--bosque);
+      color: var(--beige-arena);
+    }
+
+    .btn--oscuro:hover {
+      background: var(--bosque-medio);
+      transform: translateY(-2px);
+    }
+
+    /* ======================================================
+       SECCIONES
+    ====================================================== */
+    .seccion {
+      padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+    }
+
+    .seccion--verde {
+      background: var(--bosque);
+      color: var(--beige-arena);
+    }
+
+    .seccion--beige { background: var(--beige-suave); }
+
+    .sec__cab { margin-bottom: 3rem; }
+    .sec__cab--centro { text-align: center; }
+
+    .sec__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-top: 0.5rem;
+    }
+
+    .sec__desc {
+      font-size: 0.9rem;
+      color: var(--arena-gris);
+      max-width: 520px;
+      margin-top: 0.75rem;
+      line-height: 1.85;
+    }
+
+    .seccion--verde .sec__desc { color: rgba(245,237,216,0.65); }
+
+    /* ======================================================
+       SERVICIOS
+    ====================================================== */
+    .servicios__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .servicio {
+      background: #fff;
+      border: 1px solid rgba(74,140,98,0.12);
+      border-radius: var(--radio);
+      padding: 2rem 1.75rem;
+      transition: all var(--transicion);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .servicio::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--verde-vida);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform var(--transicion);
+    }
+
+    .servicio:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(27,58,45,0.1); }
+    .servicio:hover::before { transform: scaleY(1); }
+
+    .servicio__emoji {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .servicio__nombre {
+      font-family: var(--fuente-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--bosque);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .servicio__desc {
+      font-size: 0.82rem;
+      color: var(--arena-gris);
+      line-height: 1.75;
+    }
+
+    /* ======================================================
+       IDENTIDAD — cifras + texto
+    ====================================================== */
+    .identidad__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .identidad__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .identidad__parrafo {
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: rgba(245,237,216,0.75);
+      margin-bottom: 1.25rem;
+    }
+
+    .identidad__parrafo strong { color: var(--beige-arena); font-weight: 600; }
+
+    .cifras {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(109,184,136,0.15);
+      border: 1px solid rgba(109,184,136,0.15);
+    }
+
+    .cifra {
+      background: var(--bosque);
+      padding: 1.75rem 1.5rem;
+      transition: background var(--transicion);
+    }
+
+    .cifra:hover { background: var(--bosque-medio); }
+
+    .cifra__num {
+      font-family: var(--fuente-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--verde-claro);
+      line-height: 1;
+    }
+
+    .cifra__label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,0.45);
+      margin-top: 0.4rem;
+      line-height: 1.4;
+    }
+
+    /* ======================================================
+       CERTIFICACIONES / ALIANZAS
+    ====================================================== */
+    .certs__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: rgba(74,140,98,0.1);
+      border: 1px solid rgba(74,140,98,0.15);
+    }
+
+    .cert {
+      background: var(--beige-fondo);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: background var(--transicion);
+    }
+
+    .cert:hover { background: #fff; }
+
+    .cert__icono { font-size: 1.8rem; margin-bottom: 0.75rem; }
+
+    .cert__nombre {
+      font-family: var(--fuente-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--bosque);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .cert__desc {
+      font-size: 0.75rem;
+      color: var(--arena-gris);
+      line-height: 1.6;
+    }
+
+    /* ======================================================
+       BODEGA / OPERACIÓN — dos ubicaciones
+    ====================================================== */
+    .ubicaciones__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 580px) {
+      .ubicaciones__grid { grid-template-columns: 1fr; }
+    }
+
+    .ubicacion {
+      background: var(--bosque);
+      border-radius: var(--radio);
+      padding: 2.25rem 2rem;
+      color: var(--beige-arena);
+      border-left: 3px solid var(--verde-vida);
+    }
+
+    .ubicacion__tipo {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin-bottom: 0.5rem;
+    }
+
+    .ubicacion__nombre {
+      font-family: var(--fuente-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .ubicacion__dir {
+      font-size: 0.82rem;
+      color: rgba(245,237,216,0.6);
+      line-height: 1.7;
+    }
+
+    /* ======================================================
+       FRASE / BANNER VERDE
+    ====================================================== */
+    .banner-frase {
+      background: var(--verde-vida);
+      padding: 3.5rem 0;
+      text-align: center;
+    }
+
+    .banner-frase__texto {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.6rem, 4.5vw, 3rem);
+      font-weight: 700;
+      font-style: italic;
+      color: #fff;
+      line-height: 1.25;
+      max-width: 700px;
+      margin-inline: auto;
+    }
+
+    .banner-frase__sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-top: 1rem;
+    }
+
+    /* ======================================================
+       CONTACTO
+    ====================================================== */
+    .contacto__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      .contacto__grid { grid-template-columns: 1fr; }
+    }
+
+    .contacto__bloque {
+      background: #fff;
+      border: 1px solid rgba(74,140,98,0.15);
+      border-radius: var(--radio);
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contacto__tipo {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--verde-vida);
+      font-weight: 600;
+    }
+
+    .contacto__valor {
+      font-family: var(--fuente-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--bosque);
+    }
+
+    .contacto__desc {
+      font-size: 0.82rem;
+      color: var(--arena-gris);
+      font-style: italic;
+    }
+
+    .redes__grid {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .red-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      border-radius: 20px;
+      border: 1px solid rgba(74,140,98,0.25);
+      color: var(--bosque);
+      background: var(--beige-fondo);
+      transition: all var(--transicion);
+    }
+
+    .red-btn:hover { background: var(--bosque); color: var(--beige-arena); }
+
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+    .footer {
+      background: var(--bosque);
+      padding: 2rem 0;
+      border-top: 1px solid rgba(109,184,136,0.1);
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer__logo {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(245,237,216,0.5);
+    }
+
+    .footer__copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: rgba(245,237,216,0.3);
+    }
+
+    .footer__magnus {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(109,184,136,0.4);
+      transition: color var(--transicion);
+    }
+
+    .footer__magnus:hover { color: var(--verde-claro); }
+
+    /* ======================================================
+       ANIMACIONES
+    ====================================================== */
+    @keyframes subirEntrar {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal--d1 { transition-delay: 0.1s; }
+    .reveal--d2 { transition-delay: 0.2s; }
+    .reveal--d3 { transition-delay: 0.3s; }
+    .reveal--d4 { transition-delay: 0.4s; }
+    .reveal--d5 { transition-delay: 0.5s; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================
+       NAV
+  =================================================== -->
+  <nav class="nav">
+    <div class="contenedor nav__inner">
+      <div class="nav__logo">
+        <span class="nav__nombre">ECA Creciendo Juntos</span>
+        <span class="nav__slogan">Transformamos vidas desde la esencia</span>
+      </div>
+      <ul class="nav__links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="index.html" class="nav__volver">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
+        Magnus Holding
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===================================================
+       HERO
+  =================================================== -->
+  <section class="hero" id="inicio">
+    <div class="contenedor" style="display:contents;">
+
+      <div class="hero__texto contenedor" style="padding-left:4%; padding-right:2rem;">
+        <span class="etiqueta" style="color:var(--verde-claro);">Servicios Socioambientales · Tunja, Boyacá</span>
+        <h1 class="hero__titulo">
+          ECA<br>
+          <span class="verde">Creciendo</span><br>
+          Juntos
+        </h1>
+        <p class="hero__slogan">
+          "Trabajando en la esencia,<br>transformamos vidas."
+        </p>
+        <p class="hero__desc">
+          9 años construyendo un modelo de economía circular en Boyacá.
+          Reciclaje, abono orgánico, reforestación y educación ambiental
+          al servicio de las comunidades.
+        </p>
+        <div class="hero__ctas">
+          <a href="https://wa.me/573187607737?text=Hola%2C+quiero+información+sobre+los+servicios+de+ECA+Creciendo+Juntos"
+             target="_blank" rel="noopener" class="btn btn--whatsapp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Contactar ahora
+          </a>
+          <a href="#servicios" class="btn btn--outline">Ver servicios</a>
+        </div>
+      </div>
+
+      <!-- Panel derecho -->
+      <div class="hero__panel">
+        <div class="hero__logo-wrap">
+          <img
+            src="1780174280073_image.png"
+            alt="ECA Creciendo Juntos — Logo"
+            class="hero__logo-img"
+            onerror="this.style.opacity='0';"
+          />
+        </div>
+        <div class="hero__certs">
+          <span class="cert-badge">Marca Soy Boyacá</span>
+          <span class="cert-badge">Basura Cero LATAM</span>
+          <span class="cert-badge">ACOPI Boyacá</span>
+          <span class="cert-badge">Negocios Verdes</span>
+          <span class="cert-badge">Desde 2017</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       SERVICIOS
+  =================================================== -->
+  <section class="seccion" id="servicios">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <span class="etiqueta">¿Qué hacemos?</span>
+        <h2 class="sec__titulo">Nuestros Servicios</h2>
+        <p class="sec__desc">
+          Soluciones integrales de economía circular para empresas, instituciones
+          y comunidades en Boyacá.
+        </p>
+      </div>
+
+      <div class="servicios__grid">
+
+        <div class="servicio reveal reveal--d1">
+          <span class="servicio__emoji">♻️</span>
+          <div class="servicio__nombre">Manejo de Residuos Reciclables</div>
+          <div class="servicio__desc">Recolección, clasificación y gestión de materiales reciclables. Le damos valor económico y ambiental al residuo.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d2">
+          <span class="servicio__emoji">🌱</span>
+          <div class="servicio__nombre">ECAABONO — Humus de Lombriz</div>
+          <div class="servicio__desc">Elaboración de abono orgánico a partir de residuos orgánicos mediante lombricultura. Producto 100% natural para agricultura.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d3">
+          <span class="servicio__emoji">🕐</span>
+          <div class="servicio__nombre">Horas Sociales</div>
+          <div class="servicio__desc">Actividades de direccionamiento de horas sociales para estudiantes e instituciones. Educación ambiental con impacto real.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d4">
+          <span class="servicio__emoji">🌳</span>
+          <div class="servicio__nombre">Reforestación</div>
+          <div class="servicio__desc">Siembra estratégica de árboles nativos en zonas de Boyacá. Alianzas con colegios, empresas y entidades para recuperar el territorio.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d1">
+          <span class="servicio__emoji">🪴</span>
+          <div class="servicio__nombre">ECA Materas</div>
+          <div class="servicio__desc">Venta de plantas y suculentas. Alternativa verde para el hogar y la oficina con enfoque en economía circular y bienestar.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d2">
+          <span class="servicio__emoji">🔄</span>
+          <div class="servicio__nombre">Campañas de Trueque</div>
+          <div class="servicio__desc">Intercambio justo de elementos usados. Fomentamos el consumo consciente y le damos precio al valor de reciclar.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d3">
+          <span class="servicio__emoji">🏷️</span>
+          <div class="servicio__nombre">Venta de Elementos Usados</div>
+          <div class="servicio__desc">Comercialización de objetos con segunda vida. Cada pieza tiene historia y valor. Consumo responsable en acción.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d4">
+          <span class="servicio__emoji">⚠️</span>
+          <div class="servicio__nombre">Residuos Especiales</div>
+          <div class="servicio__desc">Manejo de RCD, RAEE, madera y aceites mediante convenios interinstitucionales. Gestión técnica y responsable de residuos de difícil disposición.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       BANNER FRASE
+  =================================================== -->
+  <div class="banner-frase">
+    <div class="contenedor">
+      <p class="banner-frase__texto reveal">
+        "Trabajando en la esencia,<br>transformamos vidas."
+      </p>
+      <p class="banner-frase__sub reveal reveal--d2">ECA Creciendo Juntos · Tunja, Boyacá</p>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       NOSOTROS
+  =================================================== -->
+  <section class="seccion seccion--verde" id="nosotros">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <span class="etiqueta" style="color:var(--verde-claro);">Nuestra historia</span>
+        <h2 class="sec__titulo">9 Años Transformando Boyacá</h2>
+      </div>
+
+      <div class="identidad__grid">
+
+        <div>
+          <p class="identidad__parrafo reveal">
+            <strong>ECA Creciendo Juntos</strong> nació el 7 de abril de 2017, registrada en
+            Cámara de Comercio con una misión clara: demostrar que el residuo tiene valor
+            y que la gestión ambiental puede ser un motor económico para las comunidades.
+          </p>
+          <p class="identidad__parrafo reveal reveal--d1">
+            En 2021 se transformó a persona jurídica, consolidando su estructura para
+            crecer en alianzas, convenios y proyectos de mayor escala. Hoy operamos desde
+            <strong>dos puntos en Tunja</strong>: nuestra bodega de reciclaje en la Calle 25 y
+            nuestra operación de orgánicos y venta de elementos usados en la Vereda Runta.
+          </p>
+          <p class="identidad__parrafo reveal reveal--d2">
+            Somos <strong>Marca Soy Boyacá</strong>, miembros de <strong>Basura Cero LATAM</strong>,
+            integrantes de <strong>ACOPI seccional Boyacá</strong> y estamos en proceso de
+            obtención del sello <strong>Negocios Verdes</strong>. También hacemos parte de la
+            Escuela Nacional de Biodiversidad y la Mesa Ambiental de Guarne como líderes
+            ambientales escolares.
+          </p>
+        </div>
+
+        <div class="cifras reveal reveal--d2">
+          <div class="cifra">
+            <div class="cifra__num">9</div>
+            <div class="cifra__label">Años de<br>operación</div>
+          </div>
+          <div class="cifra">
+            <div class="cifra__num">2017</div>
+            <div class="cifra__label">Fundación<br>registrada</div>
+          </div>
+          <div class="cifra">
+            <div class="cifra__num">4+</div>
+            <div class="cifra__label">Certificaciones<br>activas</div>
+          </div>
+          <div class="cifra">
+            <div class="cifra__num">2</div>
+            <div class="cifra__label">Puntos de<br>operación</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       CERTIFICACIONES
+  =================================================== -->
+  <section class="seccion seccion--beige">
+    <div class="contenedor">
+
+      <div class="sec__cab sec__cab--centro reveal">
+        <span class="etiqueta" style="justify-content:center;">Reconocimientos y alianzas</span>
+        <h2 class="sec__titulo">Parte de una Red Mayor</h2>
+        <div class="separador separador--centro"></div>
+      </div>
+
+      <div class="certs__grid">
+
+        <div class="cert reveal reveal--d1">
+          <div class="cert__icono">🏅</div>
+          <div class="cert__nombre">Marca Soy Boyacá</div>
+          <div class="cert__desc">Sello de identidad regional que avala calidad y origen boyacense.</div>
+        </div>
+
+        <div class="cert reveal reveal--d2">
+          <div class="cert__icono">🌍</div>
+          <div class="cert__nombre">Basura Cero LATAM</div>
+          <div class="cert__desc">Red latinoamericana de organizaciones comprometidas con la reducción de residuos.</div>
+        </div>
+
+        <div class="cert reveal reveal--d3">
+          <div class="cert__icono">🤝</div>
+          <div class="cert__nombre">ACOPI Boyacá</div>
+          <div class="cert__desc">Asociación Colombiana de Pequeñas Industrias — seccional Boyacá.</div>
+        </div>
+
+        <div class="cert reveal reveal--d4">
+          <div class="cert__icono">🌿</div>
+          <div class="cert__nombre">Sello Negocios Verdes</div>
+          <div class="cert__desc">En proceso de certificación como negocio con impacto ambiental positivo verificable.</div>
+        </div>
+
+        <div class="cert reveal reveal--d1">
+          <div class="cert__icono">📚</div>
+          <div class="cert__nombre">Escuela Nacional de Biodiversidad</div>
+          <div class="cert__desc">Integrantes de la Mesa Ambiental de Guarne y líderes ambientales escolares.</div>
+        </div>
+
+        <div class="cert reveal reveal--d2">
+          <div class="cert__icono">🦋</div>
+          <div class="cert__nombre">Economía Circular</div>
+          <div class="cert__desc">Modelo de negocio basado en el cierre de ciclos: residuo como recurso, no como problema.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       UBICACIONES
+  =================================================== -->
+  <section class="seccion">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <span class="etiqueta">Dónde estamos</span>
+        <h2 class="sec__titulo">Puntos de Operación</h2>
+        <p class="sec__desc">Dos ubicaciones en Tunja para atender tus necesidades de gestión ambiental.</p>
+      </div>
+
+      <div class="ubicaciones__grid">
+
+        <div class="ubicacion reveal reveal--d1">
+          <div class="ubicacion__tipo">Bodega Principal</div>
+          <div class="ubicacion__nombre">Bodega de Reciclaje</div>
+          <div class="ubicacion__dir">
+            Calle 25 # 16-108<br>
+            Tunja, Boyacá<br><br>
+            Recepción de materiales reciclables,<br>
+            residuos especiales y atención al cliente.
+          </div>
+        </div>
+
+        <div class="ubicacion reveal reveal--d2">
+          <div class="ubicacion__tipo">Operación Orgánicos</div>
+          <div class="ubicacion__nombre">Vereda Runta — La Cabaña</div>
+          <div class="ubicacion__dir">
+            Vereda Runta, Sector La Cabaña<br>
+            Tunja, Boyacá<br><br>
+            Producción de ECAABONO, Humus de Lombriz,<br>
+            ECA Materas y venta de elementos usados.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       CONTACTO
+  =================================================== -->
+  <section class="seccion seccion--beige" id="contacto">
+    <div class="contenedor">
+
+      <div class="sec__cab sec__cab--centro reveal">
+        <span class="etiqueta" style="justify-content:center;">Hablemos</span>
+        <h2 class="sec__titulo">Contáctanos</h2>
+        <p class="sec__desc" style="margin-inline:auto; text-align:center;">
+          ¿Tienes residuos que gestionar, quieres hacer trueque o necesitas abono orgánico?
+          Escríbenos directamente.
+        </p>
+      </div>
+
+      <div class="contacto__grid">
+
+        <div class="contacto__bloque reveal reveal--d1">
+          <div class="contacto__tipo">WhatsApp directo</div>
+          <div class="contacto__valor">318 760 7737</div>
+          <div class="contacto__desc">Atención rápida para cotizaciones y consultas.</div>
+          <a href="https://wa.me/573187607737?text=Hola%2C+quiero+información+sobre+los+servicios+de+ECA+Creciendo+Juntos"
+             target="_blank" rel="noopener" class="btn btn--whatsapp" style="width:fit-content;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Escribir ahora
+          </a>
+        </div>
+
+        <div class="contacto__bloque reveal reveal--d2">
+          <div class="contacto__tipo">Redes sociales</div>
+          <div class="contacto__valor">@ECA Creciendo Juntos</div>
+          <div class="contacto__desc">Síguenos y mantente al día con campañas, trueques y novedades ambientales.</div>
+          <div class="redes__grid">
+            <a href="https://www.facebook.com/search/top?q=ECA%20CRECIENDO%20JUNTOS"
+               target="_blank" rel="noopener" class="red-btn">📘 Facebook</a>
+            <a href="https://www.instagram.com/ecacreciendojuntos"
+               target="_blank" rel="noopener" class="red-btn">📸 Instagram</a>
+            <a href="https://www.tiktok.com/@ecacreciendojuntos"
+               target="_blank" rel="noopener" class="red-btn">🎵 TikTok</a>
+            <a href="https://www.youtube.com/@ecacreciendojuntos"
+               target="_blank" rel="noopener" class="red-btn">▶️ YouTube</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       FOOTER
+  =================================================== -->
+  <footer class="footer">
+    <div class="contenedor footer__inner">
+      <span class="footer__logo">ECA Creciendo Juntos</span>
+      <span class="footer__copy">© 2025 · Tunja, Boyacá · Desde 2017</span>
+      <a href="index.html" class="footer__magnus">Magnus Holding ↗</a>
+    </div>
+  </footer>
+
+  <!-- ===================================================
+       JS — Scroll reveal
+  =================================================== -->
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(el){ el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
