@@ -1,1 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Magnus Holding — Soluciones estratégicas en Boyacá. Alianzas, proyectos y estructura empresarial desde Tunja." />
+  <meta name="author" content="Magnus Holding" />
+  <title>Magnus Holding — Tunja, Boyacá</title>
 
+  <!-- =====================================================
+       TIPOGRAFÍA — Google Fonts
+       Cormorant Garamond: elegante, serif de alto contraste
+       Jost: geométrica, limpia para cuerpo y UI
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===================================================
+       VARIABLES GLOBALES — Paleta "old money"
+       Editar aquí para cambiar toda la identidad visual
+    =================================================== */
+    :root {
+      --azul-profundo:   #0D1B2A;   /* fondo principal */
+      --azul-medio:      #162033;   /* tarjetas / secciones alternas */
+      --azul-borde:      #1E2D42;   /* bordes sutiles */
+      --carbon:          #111518;   /* negro cálido */
+      --dorado:          #C9A84C;   /* acento dorado */
+      --dorado-suave:    #E8D5A3;   /* dorado claro para texto destacado */
+      --blanco-hueso:    #F5F0E8;   /* texto principal */
+      --gris-plata:      #8A9BB0;   /* texto secundario */
+      --gris-claro:      #B8C8D8;   /* texto terciario */
+
+      --fuente-display:  'Cormorant Garamond', Georgia, serif;
+      --fuente-ui:       'Jost', sans-serif;
+
+      --radio:           2px;       /* bordes angulares — old money no redondea */
+      --max-ancho:       1100px;
+      --transicion:      0.35s ease;
+    }
+
+    /* ===================================================
+       RESET & BASE
+    =================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--azul-profundo);
+      color: var(--blanco-hueso);
+      font-family: var(--fuente-ui);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    /* ===================================================
+       UTILIDADES
+    =================================================== */
+    .contenedor {
+      width: 90%;
+      max-width: var(--max-ancho);
+      margin-inline: auto;
+    }
+
+    .separador {
+      width: 48px;
+      height: 1px;
+      background: var(--dorado);
+      margin: 1.5rem 0;
+    }
+
+    .separador--centro {
+      margin-inline: auto;
+    }
+
+    .etiqueta {
+      font-family: var(--fuente-ui);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--dorado);
+    }
+
+    /* ===================================================
+       NAVEGACIÓN
+    =================================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.4rem 0;
+      background: linear-gradient(to bottom, rgba(13,27,42,0.97) 70%, transparent);
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logotipo en texto — reemplazar con <img> si se tiene SVG */
+    .nav__logo {
+      font-family: var(--fuente-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--blanco-hueso);
+    }
+
+    .nav__logo span {
+      color: var(--dorado);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris-plata);
+      transition: color var(--transicion);
+    }
+
+    .nav__links a:hover { color: var(--dorado); }
+
+    /* Ocultar links en móvil pequeño */
+    @media (max-width: 600px) {
+      .nav__links { display: none; }
+    }
+
+    /* ===================================================
+       HERO SECTION
+    =================================================== */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 5rem;
+    }
+
+    /* Textura de fondo — líneas diagonales sutiles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 60px,
+          rgba(201,168,76,0.025) 60px,
+          rgba(201,168,76,0.025) 61px
+        );
+      pointer-events: none;
+    }
+
+    /* Brillo esquina superior derecha */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__contenido {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+      color: var(--blanco-hueso);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero__titulo em {
+      font-style: italic;
+      color: var(--dorado-suave);
+    }
+
+    .hero__subtitulo {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--gris-claro);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero__ubicacion {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris-plata);
+      margin-bottom: 3rem;
+    }
+
+    .hero__ubicacion::before {
+      content: '';
+      width: 20px;
+      height: 1px;
+      background: var(--dorado);
+      flex-shrink: 0;
+    }
+
+    .hero__ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ===================================================
+       BOTONES
+    =================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-family: var(--fuente-ui);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: var(--radio);
+      transition: all var(--transicion);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn--primario {
+      background: var(--dorado);
+      color: var(--carbon);
+    }
+
+    .btn--primario:hover {
+      background: var(--dorado-suave);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.25);
+    }
+
+    .btn--secundario {
+      background: transparent;
+      color: var(--blanco-hueso);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn--secundario:hover {
+      border-color: var(--dorado);
+      color: var(--dorado);
+    }
+
+    .btn--whatsapp {
+      background: #1a3a2a;
+      color: #4ade80;
+      border: 1px solid rgba(74,222,128,0.2);
+    }
+
+    .btn--whatsapp:hover {
+      background: #1f4733;
+      box-shadow: 0 8px 24px rgba(74,222,128,0.15);
+    }
+
+    /* ===================================================
+       SECCIONES — estructura común
+    =================================================== */
+    .seccion {
+      padding: clamp(5rem, 10vw, 9rem) 0;
+      border-top: 1px solid var(--azul-borde);
+    }
+
+    .seccion--alt {
+      background: var(--azul-medio);
+    }
+
+    .seccion__cabecera {
+      margin-bottom: 3.5rem;
+    }
+
+    .seccion__cabecera--centro {
+      text-align: center;
+    }
+
+    .seccion__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--blanco-hueso);
+      margin-top: 0.75rem;
+    }
+
+    .seccion__descripcion {
+      font-size: 0.95rem;
+      color: var(--gris-claro);
+      max-width: 520px;
+      margin-top: 1rem;
+      line-height: 1.8;
+    }
+
+    /* ===================================================
+       ALIADOS ESTRATÉGICOS — grid de logos
+    =================================================== */
+    .aliados__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5px; /* efecto de separación con fondo */
+      background: var(--azul-borde);
+      border: 1px solid var(--azul-borde);
+    }
+
+    .aliado__card {
+      background: var(--azul-profundo);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: background var(--transicion);
+      text-decoration: none;
+    }
+
+    .aliado__card:hover {
+      background: var(--azul-medio);
+    }
+
+    /* ── Placeholder logo ── */
+    /* Reemplazar .aliado__logo-placeholder con <img src="logo.svg" alt="Nombre"> */
+    .aliado__logo-placeholder {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fuente-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--dorado);
+      flex-shrink: 0;
+    }
+
+    .aliado__info {}
+
+    .aliado__nombre {
+      font-family: var(--fuente-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--blanco-hueso);
+    }
+
+    .aliado__sector {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris-plata);
+      margin-top: 0.25rem;
+    }
+
+    /* ===================================================
+       PROYECTO DESTACADO — GeoProject
+    =================================================== */
+    .proyecto__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--azul-borde);
+    }
+
+    @media (max-width: 700px) {
+      .proyecto__grid { grid-template-columns: 1fr; }
+    }
+
+    .proyecto__imagen {
+      background: var(--azul-medio);
+      min-height: 320px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Patrón topográfico SVG inline como fondo decorativo */
+    .proyecto__imagen::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Ccircle cx='200' cy='200' r='180' fill='none' stroke='rgba(201,168,76,0.08)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='140' fill='none' stroke='rgba(201,168,76,0.08)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='100' fill='none' stroke='rgba(201,168,76,0.1)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='60' fill='none' stroke='rgba(201,168,76,0.12)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='20' fill='none' stroke='rgba(201,168,76,0.18)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 80%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .proyecto__icono-geo {
+      font-family: var(--fuente-display);
+      font-size: 5rem;
+      color: rgba(201,168,76,0.2);
+      position: relative;
+      z-index: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .proyecto__contenido {
+      padding: 3.5rem 3rem;
+      background: var(--azul-profundo);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (max-width: 700px) {
+      .proyecto__contenido { padding: 2.5rem 1.8rem; }
+    }
+
+    .proyecto__tag {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .proyecto__nombre {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--blanco-hueso);
+      margin-bottom: 1rem;
+    }
+
+    .proyecto__desc {
+      font-size: 0.9rem;
+      color: var(--gris-claro);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+
+    .proyecto__detalles {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .proyecto__detalle {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--gris-plata);
+    }
+
+    .proyecto__detalle::before {
+      content: '—';
+      color: var(--dorado);
+      flex-shrink: 0;
+    }
+
+    /* ===================================================
+       CREDIBILIDAD — métricas y pilares
+    =================================================== */
+    .credibilidad__metricas {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5px;
+      background: var(--azul-borde);
+      border: 1px solid var(--azul-borde);
+      margin-bottom: 5rem;
+    }
+
+    .metrica {
+      background: var(--azul-profundo);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background var(--transicion);
+    }
+
+    .metrica:hover { background: var(--azul-medio); }
+
+    .metrica__numero {
+      font-family: var(--fuente-display);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 300;
+      color: var(--dorado);
+      line-height: 1;
+    }
+
+    .metrica__label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gris-plata);
+      margin-top: 0.75rem;
+      line-height: 1.5;
+    }
+
+    /* Pilares / valores */
+    .credibilidad__pilares {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .pilar {
+      border-left: 1px solid rgba(201,168,76,0.3);
+      padding-left: 1.5rem;
+    }
+
+    .pilar__titulo {
+      font-family: var(--fuente-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--blanco-hueso);
+      margin-bottom: 0.5rem;
+    }
+
+    .pilar__texto {
+      font-size: 0.85rem;
+      color: var(--gris-plata);
+      line-height: 1.75;
+    }
+
+    /* ===================================================
+       MANIFIESTO — bloque de cita
+    =================================================== */
+    .manifiesto {
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      background: var(--carbon);
+      border-top: 1px solid var(--azul-borde);
+      border-bottom: 1px solid var(--azul-borde);
+      text-align: center;
+    }
+
+    .manifiesto__cita {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.5rem, 4vw, 2.6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--blanco-hueso);
+      max-width: 800px;
+      margin-inline: auto;
+      line-height: 1.4;
+    }
+
+    .manifiesto__cita span {
+      color: var(--dorado);
+    }
+
+    .manifiesto__atrib {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gris-plata);
+      margin-top: 1.5rem;
+    }
+
+    /* ===================================================
+       CONTACTO
+    =================================================== */
+    .contacto {
+      text-align: center;
+    }
+
+    .contacto .seccion__descripcion {
+      margin-inline: auto;
+    }
+
+    .contacto__acciones {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+
+    .contacto__datos {
+      margin-top: 3rem;
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .dato {
+      text-align: center;
+    }
+
+    .dato__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris-plata);
+      margin-bottom: 0.4rem;
+    }
+
+    .dato__valor {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      color: var(--blanco-hueso);
+    }
+
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    .footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--azul-borde);
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer__logo {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      color: var(--gris-plata);
+    }
+
+    .footer__copy {
+      font-size: 0.72rem;
+      color: var(--gris-plata);
+      letter-spacing: 0.05em;
+    }
+
+    .footer__loc {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(138,155,176,0.5);
+    }
+
+    /* ===================================================
+       ANIMACIONES
+    =================================================== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    /* Reveal al hacer scroll — clase añadida por JS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Retrasos escalonados */
+    .reveal--d1 { transition-delay: 0.1s; }
+    .reveal--d2 { transition-delay: 0.2s; }
+    .reveal--d3 { transition-delay: 0.3s; }
+    .reveal--d4 { transition-delay: 0.4s; }
+    .reveal--d5 { transition-delay: 0.5s; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================================================
+       NAVEGACIÓN
+  =================================================== -->
+  <nav class="nav">
+    <div class="contenedor nav__inner">
+      <!-- Reemplazar texto con <img> si tienes logotipo SVG -->
+      <a href="#inicio" class="nav__logo">Magnus <span>Holding</span></a>
+      <ul class="nav__links">
+        <li><a href="#aliados">Aliados</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===================================================
+       HERO
+  =================================================== -->
+  <section class="hero" id="inicio">
+    <div class="contenedor">
+      <div class="hero__contenido">
+
+        <span class="etiqueta">Fundada en Tunja, Boyacá</span>
+
+        <div class="separador"></div>
+
+        <h1 class="hero__titulo">
+          Magnus Holding —<br>
+          <em>Soluciones Estratégicas</em><br>
+          en Boyacá
+        </h1>
+
+        <p class="hero__subtitulo">
+          Construimos estructura empresarial real en el corazón de Colombia.
+          Alianzas sólidas, proyectos con propósito y ejecución que genera valor
+          en la región.
+        </p>
+
+        <div class="hero__ubicacion">
+          Tunja · Boyacá · Colombia
+        </div>
+
+        <div class="hero__ctas">
+          <a href="#aliados" class="btn btn--primario">Ver alianzas</a>
+          <a href="#contacto" class="btn btn--secundario">Conversar</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       ALIADOS ESTRATÉGICOS
+       ─ Reemplazar cada .aliado__logo-placeholder por:
+         <img src="ruta/logo.svg" alt="Nombre empresa">
+  =================================================== -->
+  <section class="seccion" id="aliados">
+    <div class="contenedor">
+
+      <div class="seccion__cabecera reveal">
+        <span class="etiqueta">Red empresarial</span>
+        <h2 class="seccion__titulo">Aliados Estratégicos</h2>
+        <p class="seccion__descripcion">
+          Organizaciones con las que construimos proyectos, compartimos recursos
+          y generamos impacto en Boyacá.
+        </p>
+      </div>
+
+      <div class="aliados__grid">
+
+        <!-- ALIADO 1 — GeoProject -->
+        <a href="page_geoproject.html" class="aliado__card reveal reveal--d1" style="cursor:pointer;">
+          <div class="aliado__logo-placeholder">G</div>
+          <!-- Para imagen real: <img src="img/geoproject-logo.png" alt="GeoProject"> -->
+          <div class="aliado__info">
+            <div class="aliado__nombre">GeoProject</div>
+            <div class="aliado__sector">Topografía e Ingeniería</div>
+          </div>
+          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--dorado); margin-top:auto;">Ver empresa →</div>
+        </a>
+
+        <!-- ALIADO 2 -->
+        <div class="aliado__card reveal reveal--d2">
+          <div class="aliado__logo-placeholder">J</div>
+          <div class="aliado__info">
+            <div class="aliado__nombre">Aliado 2</div>
+            <div class="aliado__sector">Sector — Editar</div>
+          </div>
+        </div>
+
+        <!-- ALIADO 3 -->
+        <div class="aliado__card reveal reveal--d3">
+          <div class="aliado__logo-placeholder">A</div>
+          <div class="aliado__info">
+            <div class="aliado__nombre">Aliado 3</div>
+            <div class="aliado__sector">Sector — Editar</div>
+          </div>
+        </div>
+
+        <!-- ALIADO 4 -->
+        <div class="aliado__card reveal reveal--d4">
+          <div class="aliado__logo-placeholder">B</div>
+          <div class="aliado__info">
+            <div class="aliado__nombre">Aliado 4</div>
+            <div class="aliado__sector">Sector — Editar</div>
+          </div>
+        </div>
+
+        <!-- ALIADO 5 — opcional, eliminar si no se necesita -->
+        <div class="aliado__card reveal reveal--d5">
+          <div class="aliado__logo-placeholder">C</div>
+          <div class="aliado__info">
+            <div class="aliado__nombre">Aliado 5</div>
+            <div class="aliado__sector">Sector — Editar</div>
+          </div>
+        </div>
+
+      </div><!-- /aliados__grid -->
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       PROYECTO DESTACADO — GeoProject
+  =================================================== -->
+  <section class="seccion seccion--alt" id="proyectos">
+    <div class="contenedor">
+
+      <div class="seccion__cabecera reveal">
+        <span class="etiqueta">Proyecto destacado</span>
+        <h2 class="seccion__titulo">Empresas del Grupo</h2>
+      </div>
+
+      <div class="proyecto__grid reveal">
+
+        <!-- Panel izquierdo: imagen / ilustración -->
+        <div class="proyecto__imagen">
+          <!-- Reemplazar con <img src="img/geoproject.jpg" alt="GeoProject"> -->
+          <div class="proyecto__icono-geo">⌖</div>
+        </div>
+
+        <!-- Panel derecho: contenido -->
+        <div class="proyecto__contenido">
+          <span class="proyecto__tag">Servicios topográficos</span>
+          <h3 class="proyecto__nombre">GeoProject</h3>
+          <p class="proyecto__desc">
+            Empresa familiar de topografía y levantamientos técnicos con operaciones
+            en Boyacá. Presta servicios de medición de terrenos, cartografía,
+            levantamientos catastrales y soporte técnico para proyectos de
+            construcción e ingeniería civil en la región.
+          </p>
+          <div class="proyecto__detalles">
+            <div class="proyecto__detalle">Levantamientos planimétricos y altimétricos</div>
+            <div class="proyecto__detalle">Deslinde y amojonamiento predial</div>
+            <div class="proyecto__detalle">Cartografía para proyectos de construcción</div>
+            <div class="proyecto__detalle">Operación en Tunja y municipios de Boyacá</div>
+          </div>
+        </div>
+
+      </div><!-- /proyecto__grid -->
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       MANIFIESTO
+  =================================================== -->
+  <div class="manifiesto">
+    <div class="contenedor">
+      <p class="manifiesto__cita reveal">
+        "Construimos <span>estructura empresarial real</span> en Boyacá —
+        no promesas, sino alianzas verificables y proyectos con nombre propio."
+      </p>
+      <p class="manifiesto__atrib reveal reveal--d2">Magnus Holding · Tunja</p>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       CREDIBILIDAD — Nosotros
+  =================================================== -->
+  <section class="seccion" id="nosotros">
+    <div class="contenedor">
+
+      <div class="seccion__cabecera seccion__cabecera--centro reveal">
+        <span class="etiqueta">Quiénes somos</span>
+        <h2 class="seccion__titulo">Estructura. Red. Ejecución.</h2>
+        <div class="separador separador--centro"></div>
+      </div>
+
+      <!-- Métricas / cifras -->
+      <div class="credibilidad__metricas">
+        <div class="metrica reveal reveal--d1">
+          <div class="metrica__numero">01</div>
+          <div class="metrica__label">Empresa activa<br>en el grupo</div>
+        </div>
+        <div class="metrica reveal reveal--d2">
+          <div class="metrica__numero">5+</div>
+          <div class="metrica__label">Alianzas<br>estratégicas</div>
+        </div>
+        <div class="metrica reveal reveal--d3">
+          <div class="metrica__numero">8</div>
+          <div class="metrica__label">Fases del sistema<br>Magnus</div>
+        </div>
+        <div class="metrica reveal reveal--d4">
+          <div class="metrica__numero">100%</div>
+          <div class="metrica__label">Boyacá<br>como base</div>
+        </div>
+      </div>
+
+      <!-- Pilares -->
+      <div class="credibilidad__pilares">
+
+        <div class="pilar reveal reveal--d1">
+          <h3 class="pilar__titulo">Holding Model</h3>
+          <p class="pilar__texto">
+            Magnus opera como una estructura holding: una cabeza estratégica que
+            agrupa empresas y proyectos independientes bajo una visión común.
+            Cada unidad conserva autonomía operativa; la holding aporta red,
+            capital y dirección.
+          </p>
+        </div>
+
+        <div class="pilar reveal reveal--d2">
+          <h3 class="pilar__titulo">Raíces Regionales</h3>
+          <p class="pilar__texto">
+            Tunja y Boyacá no son el punto de partida temporal — son el territorio
+            donde construimos. La apuesta es desarrollar empresas que generen
+            empleo, activos y referentes en la región a largo plazo.
+          </p>
+        </div>
+
+        <div class="pilar reveal reveal--d3">
+          <h3 class="pilar__titulo">Sistema de 8 Fases</h3>
+          <p class="pilar__texto">
+            Desde la entrada de información hasta el ciclo de retroalimentación,
+            Magnus opera con un sistema estructurado: Input, Análisis, Estrategia,
+            Red, Ejecución, Capital, Presencia y Feedback Loop.
+          </p>
+        </div>
+
+        <div class="pilar reveal reveal--d4">
+          <h3 class="pilar__titulo">Tecnología Aplicada</h3>
+          <p class="pilar__texto">
+            Automatización de procesos, plataformas de datos institucionales
+            y herramientas de inteligencia artificial como palancas para escalar
+            operaciones sin escalar costos fijos.
+          </p>
+        </div>
+
+      </div><!-- /pilares -->
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       CONTACTO
+  =================================================== -->
+  <section class="seccion seccion--alt" id="contacto">
+    <div class="contenedor contacto">
+
+      <div class="seccion__cabecera seccion__cabecera--centro reveal">
+        <span class="etiqueta">Hablemos</span>
+        <h2 class="seccion__titulo">Iniciar una Conversación</h2>
+        <p class="seccion__descripcion">
+          Si tienes un proyecto en Boyacá, buscas una alianza estratégica
+          o quieres conocer el sistema Magnus, escríbenos directamente.
+        </p>
+      </div>
+
+      <div class="contacto__acciones reveal">
+        <!--
+          WhatsApp — reemplazar el número:
+          https://wa.me/573XXXXXXXXX?text=Hola%2C+me+interesa+conocer+más+sobre+Magnus+Holding
+        -->
+        <a
+          href="https://wa.me/573000000000?text=Hola%2C+me+interesa+conocer+más+sobre+Magnus+Holding"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--whatsapp"
+        >
+          <!-- Ícono WhatsApp SVG inline (sin dependencias) -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          WhatsApp
+        </a>
+
+        <!--
+          Email — reemplazar la dirección:
+        -->
+        <a
+          href="mailto:contacto@magnusholding.co"
+          class="btn btn--secundario"
+        >
+          contacto@magnusholding.co
+        </a>
+      </div>
+
+      <!-- Datos adicionales de contacto -->
+      <div class="contacto__datos reveal reveal--d2">
+        <div class="dato">
+          <div class="dato__label">Ubicación</div>
+          <div class="dato__valor">Tunja, Boyacá</div>
+        </div>
+        <div class="dato">
+          <div class="dato__label">Disponibilidad</div>
+          <div class="dato__valor">Lun – Sáb</div>
+        </div>
+        <div class="dato">
+          <div class="dato__label">Idioma</div>
+          <div class="dato__valor">Español</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       FOOTER
+  =================================================== -->
+  <footer class="footer">
+    <div class="contenedor footer__inner">
+      <span class="footer__logo">Magnus Holding</span>
+      <span class="footer__copy">© 2025 Magnus Holding. Tunja, Boyacá.</span>
+      <span class="footer__loc">Colombia · Todos los derechos reservados</span>
+    </div>
+  </footer>
+
+  <!-- ===================================================
+       JAVASCRIPT — Scroll reveal (sin dependencias)
+  =================================================== -->
+  <script>
+    // Intersection Observer para animaciones al hacer scroll
+    (function () {
+      const elementos = document.querySelectorAll('.reveal');
+
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: mostrar todo si el browser no soporta IO
+        elementos.forEach(function (el) { el.classList.add('visible'); });
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target); // solo una vez
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      elementos.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
