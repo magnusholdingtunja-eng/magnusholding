@@ -148,7 +148,7 @@
     @keyframes subir{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
     .reveal.visible{opacity:1;transform:translateY(0);}
-    .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
+    .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}.d6{transition-delay:.6s;}.d7{transition-delay:.7s;}
   </style>
 </head>
 <body>
@@ -203,7 +203,6 @@
 
       <div class="hero-panel">
         <div class="hero-escudo">
-          <!-- Reemplazar por <img src="img/magnus-logo.png"> cuando tengas el PNG con fondo transparente -->
           <svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="gO" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -214,11 +213,9 @@
               </linearGradient>
               <filter id="fs"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,.6)"/></filter>
             </defs>
-            <!-- Escudo -->
             <path d="M150 8 L278 52 L278 185 Q278 280 150 340 Q22 280 22 185 L22 52 Z" fill="#0A0808" stroke="url(#gO)" stroke-width="2.5" filter="url(#fs)"/>
             <path d="M150 20 L265 60 L265 183 Q265 268 150 324 Q35 268 35 183 L35 60 Z" fill="none" stroke="rgba(201,168,76,.18)" stroke-width="1.2"/>
             <path d="M150 30 L255 66 L255 182 Q255 260 150 312 Q45 260 45 182 L45 66 Z" fill="none" stroke="rgba(201,168,76,.07)" stroke-width=".8"/>
-            <!-- Melena -->
             <ellipse cx="150" cy="118" rx="76" ry="80" fill="rgba(128,92,26,.2)"/>
             <ellipse cx="86"  cy="74" rx="19" ry="14" fill="rgba(172,128,43,.4)"  transform="rotate(-30,86,74)"/>
             <ellipse cx="110" cy="56" rx="17" ry="13" fill="rgba(175,130,40,.44)" transform="rotate(-10,110,56)"/>
@@ -229,10 +226,8 @@
             <ellipse cx="225" cy="104" rx="14" ry="19" fill="rgba(152,112,36,.34)" transform="rotate(52,225,104)"/>
             <ellipse cx="76"  cy="138" rx="12" ry="16" fill="rgba(135,98,30,.28)"  transform="rotate(-65,76,138)"/>
             <ellipse cx="224" cy="138" rx="12" ry="16" fill="rgba(135,98,30,.28)"  transform="rotate(65,224,138)"/>
-            <!-- Cabeza -->
             <ellipse cx="150" cy="120" rx="54" ry="52" fill="url(#gL)"/>
             <ellipse cx="150" cy="108" rx="34" ry="30" fill="rgba(215,170,63,.52)"/>
-            <!-- Hocico -->
             <ellipse cx="150" cy="138" rx="25" ry="19" fill="rgba(180,136,50,.9)"/>
             <ellipse cx="150" cy="129" rx="9" ry="6.5" fill="rgba(72,40,10,.85)"/>
             <ellipse cx="145" cy="131" rx="2.5" ry="2" fill="rgba(42,20,5,.9)"/>
@@ -243,7 +238,6 @@
             <line x1="124" y1="138" x2="141" y2="138" stroke="rgba(240,230,192,.52)" stroke-width=".8" stroke-linecap="round"/>
             <line x1="159" y1="136" x2="176" y2="133" stroke="rgba(240,230,192,.62)" stroke-width="1" stroke-linecap="round"/>
             <line x1="159" y1="138" x2="176" y2="138" stroke="rgba(240,230,192,.52)" stroke-width=".8" stroke-linecap="round"/>
-            <!-- Ojos -->
             <ellipse cx="126" cy="110" rx="12" ry="10" fill="rgba(20,12,3,.95)"/>
             <ellipse cx="126" cy="110" rx="9" ry="7.5" fill="rgba(196,126,16,.9)"/>
             <ellipse cx="126" cy="110" rx="4.5" ry="4.5" fill="rgba(6,3,1,.98)"/>
@@ -254,22 +248,18 @@
             <ellipse cx="174" cy="110" rx="4.5" ry="4.5" fill="rgba(6,3,1,.98)"/>
             <ellipse cx="177" cy="107" rx="2.8" ry="2.2" fill="#8B1A1A" opacity=".92"/>
             <ellipse cx="178" cy="106" rx="1.3" ry="1" fill="rgba(255,92,92,.7)"/>
-            <!-- Cejas -->
             <path d="M115 102 Q126 97 137 102" fill="none" stroke="rgba(92,62,16,.62)" stroke-width="2.2" stroke-linecap="round"/>
             <path d="M163 102 Q174 97 185 102" fill="none" stroke="rgba(92,62,16,.62)" stroke-width="2.2" stroke-linecap="round"/>
-            <!-- Orejas -->
             <path d="M96 80 Q90 60 107 70 Q110 84 103 89 Z" fill="rgba(196,156,50,.85)"/>
             <path d="M100 80 Q96 65 107 72 Q109 83 105 87 Z" fill="rgba(152,96,36,.7)"/>
             <path d="M204 80 Q210 60 193 70 Q190 84 197 89 Z" fill="rgba(196,156,50,.85)"/>
             <path d="M200 80 Q204 65 193 72 Q191 83 195 87 Z" fill="rgba(152,96,36,.7)"/>
-            <!-- Texto escudo -->
             <line x1="65" y1="195" x2="235" y2="195" stroke="rgba(201,168,76,.26)" stroke-width=".8"/>
             <text x="150" y="218" font-family="'Cormorant Garamond',Georgia,serif" font-size="20" font-weight="700" fill="url(#gO)" text-anchor="middle" letter-spacing="6">MAGNUS</text>
             <line x1="100" y1="226" x2="200" y2="226" stroke="rgba(201,168,76,.16)" stroke-width=".5"/>
             <text x="150" y="246" font-family="'Cormorant Garamond',Georgia,serif" font-size="13" font-weight="300" fill="rgba(201,168,76,.62)" text-anchor="middle" letter-spacing="8">HOLDING</text>
             <text x="150" y="270" font-family="serif" font-size="9" fill="rgba(201,168,76,.28)" text-anchor="middle" letter-spacing="10">&#9733; &#9733; &#9733;</text>
             <text x="150" y="288" font-family="'Cormorant Garamond',Georgia,serif" font-size="7.5" font-style="italic" fill="rgba(201,168,76,.38)" text-anchor="middle" letter-spacing="2">Renace &middot; Lidera &middot; Conquista</text>
-            <!-- Esquinas ornamentales -->
             <line x1="22" y1="52"  x2="44"  y2="52"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
             <line x1="22" y1="52"  x2="22"  y2="74"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
             <line x1="278" y1="52" x2="256" y2="52"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
@@ -315,6 +305,16 @@
           <div><div class="ali-nom">Sky Visual</div><div class="ali-sec">Fotograf&iacute;a &amp; Contenido Digital</div></div>
           <div class="ali-cta">Ver empresa &rarr;</div>
         </a>
+        <a href="page_ecogranjasantaines.html" class="ali reveal d6">
+          <div class="ali-ico">EG</div>
+          <div><div class="ali-nom">Eco Granja Santa In&eacute;s</div><div class="ali-sec">Insumos Org&aacute;nicos &middot; Agropecuaria</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
+        </a>
+        <a href="page_seateam7.html" class="ali reveal d7">
+          <div class="ali-ico">ST</div>
+          <div><div class="ali-nom">Sea Team</div><div class="ali-sec">Escuela de Nataci&oacute;n</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
+        </a>
       </div>
     </div>
   </section>
@@ -336,7 +336,7 @@
         <div class="sep"></div>
       </div>
       <div class="mets">
-        <div class="met reveal d1"><div class="met-n">5+</div><div class="met-l">Alianzas<br>estrat&eacute;gicas</div></div>
+        <div class="met reveal d1"><div class="met-n">7+</div><div class="met-l">Alianzas<br>estrat&eacute;gicas</div></div>
         <div class="met reveal d2"><div class="met-n">8</div><div class="met-l">Fases del<br>sistema Magnus</div></div>
         <div class="met reveal d3"><div class="met-n">2026</div><div class="met-l">A&ntilde;o de<br>consolidaci&oacute;n</div></div>
         <div class="met reveal d4"><div class="met-n">100%</div><div class="met-l">Boyac&aacute;<br>como base</div></div>
