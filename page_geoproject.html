@@ -1,1 +1,957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GeoProject — Topografía e Ingeniería. Levantamientos georreferenciados, SIG y análisis territorial en Boyacá, Colombia." />
+  <title>GeoProject · Topografía e Ingeniería · Boyacá</title>
 
+  <!-- Tipografías: Bebas Neue (display técnico) + Inconsolata (monospace de campo) + Libre Baskerville (cuerpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inconsolata:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ======================================================
+       VARIABLES — Paleta cartográfica
+    ====================================================== */
+    :root {
+      --negro-mapa:     #0A0C0E;
+      --gris-acero:     #141820;
+      --gris-linea:     #1E2530;
+      --gris-medio:     #2E3A48;
+      --amarillo-geo:   #F5C842;
+      --amarillo-suave: #F7D97A;
+      --blanco-papel:   #E8E4D8;
+      --gris-texto:     #8A9BAA;
+      --gris-claro:     #B0BEC5;
+      --rojo-coord:     #C0392B;  /* acento puntual, como marcador de terreno */
+
+      --fuente-display: 'Bebas Neue', Impact, sans-serif;
+      --fuente-mono:    'Inconsolata', 'Courier New', monospace;
+      --fuente-cuerpo:  'Libre Baskerville', Georgia, serif;
+
+      --max-ancho: 1080px;
+      --transicion: 0.3s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--negro-mapa);
+      color: var(--blanco-papel);
+      font-family: var(--fuente-mono);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ======================================================
+       TEXTURA DE FONDO — cuadrícula cartográfica
+    ====================================================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,200,66,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,200,66,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ======================================================
+       UTILIDADES
+    ====================================================== */
+    .contenedor {
+      width: 92%;
+      max-width: var(--max-ancho);
+      margin-inline: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .coord {
+      font-family: var(--fuente-mono);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--amarillo-geo);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .coord::before {
+      content: '◈';
+      font-size: 0.55rem;
+    }
+
+    .linea-geo {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, var(--amarillo-geo), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ======================================================
+       NAV
+    ====================================================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 0;
+      background: rgba(10,12,14,0.92);
+      border-bottom: 1px solid rgba(245,200,66,0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav__logo-texto {
+      font-family: var(--fuente-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--blanco-papel);
+    }
+
+    .nav__logo-sub {
+      font-family: var(--fuente-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--amarillo-geo);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .nav__volver {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--fuente-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris-texto);
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--gris-linea);
+      transition: all var(--transicion);
+    }
+
+    .nav__volver:hover {
+      color: var(--amarillo-geo);
+      border-color: var(--amarillo-geo);
+    }
+
+    .nav__volver svg { width: 12px; height: 12px; }
+
+    /* ======================================================
+       HERO
+    ====================================================== */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    /* Cruz de coordenadas en el fondo */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 5%;
+      transform: translateY(-50%);
+      width: 500px;
+      height: 500px;
+      border: 1px solid rgba(245,200,66,0.06);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero__texto {
+      padding: 4rem 0;
+      animation: entradaHero 1s ease both;
+    }
+
+    .hero__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--blanco-papel);
+      margin: 1rem 0;
+    }
+
+    .hero__titulo .acento {
+      color: var(--amarillo-geo);
+      display: block;
+    }
+
+    .hero__sub {
+      font-family: var(--fuente-cuerpo);
+      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+      font-style: italic;
+      color: var(--gris-claro);
+      max-width: 420px;
+      line-height: 1.8;
+      margin-top: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero__ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Panel derecho — logo + datos técnicos */
+    .hero__panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      position: relative;
+      animation: entradaHero 1.2s ease 0.2s both;
+    }
+
+    @media (max-width: 700px) {
+      .hero__panel { padding: 2rem 0; }
+    }
+
+    .hero__logo-img {
+      width: min(280px, 70vw);
+      height: auto;
+      filter: contrast(1.1) brightness(1.05);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Marco técnico alrededor del logo */
+    .hero__marco {
+      position: relative;
+      padding: 2rem;
+    }
+
+    .hero__marco::before,
+    .hero__marco::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--amarillo-geo);
+      border-style: solid;
+    }
+
+    .hero__marco::before {
+      top: 0; left: 0;
+      border-width: 2px 0 0 2px;
+    }
+
+    .hero__marco::after {
+      bottom: 0; right: 0;
+      border-width: 0 2px 2px 0;
+    }
+
+    /* Datos de coordenadas del hero */
+    .hero__coords {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      align-items: center;
+    }
+
+    .hero__coords span {
+      font-family: var(--fuente-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: rgba(245,200,66,0.5);
+    }
+
+    /* ======================================================
+       BOTONES
+    ====================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      font-family: var(--fuente-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transicion);
+    }
+
+    .btn--primario {
+      background: var(--amarillo-geo);
+      color: var(--negro-mapa);
+    }
+
+    .btn--primario:hover {
+      background: var(--amarillo-suave);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(245,200,66,0.3);
+    }
+
+    .btn--secundario {
+      background: transparent;
+      color: var(--blanco-papel);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn--secundario:hover {
+      border-color: var(--amarillo-geo);
+      color: var(--amarillo-geo);
+    }
+
+    .btn--whatsapp {
+      background: #1B3A2A;
+      color: #4ade80;
+      border: 1px solid rgba(74,222,128,0.25);
+    }
+
+    .btn--whatsapp:hover {
+      background: #22503a;
+      box-shadow: 0 6px 20px rgba(74,222,128,0.15);
+    }
+
+    /* ======================================================
+       SECCIONES
+    ====================================================== */
+    .seccion {
+      padding: clamp(4rem, 8vw, 7rem) 0;
+      border-top: 1px solid var(--gris-linea);
+      position: relative;
+    }
+
+    .seccion--alt { background: var(--gris-acero); }
+
+    .sec__cab { margin-bottom: 3rem; }
+
+    .sec__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: 0.05em;
+      color: var(--blanco-papel);
+      line-height: 1;
+      margin-top: 0.75rem;
+    }
+
+    .sec__desc {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--gris-claro);
+      max-width: 500px;
+      line-height: 1.8;
+      margin-top: 1rem;
+    }
+
+    /* ======================================================
+       SERVICIOS — grid estilo plano técnico
+    ====================================================== */
+    .servicios__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--gris-linea);
+      border: 1px solid var(--gris-linea);
+    }
+
+    .servicio {
+      background: var(--negro-mapa);
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: background var(--transicion);
+      overflow: hidden;
+    }
+
+    .servicio:hover { background: var(--gris-acero); }
+
+    /* Número de servicio estilo plano */
+    .servicio__num {
+      font-family: var(--fuente-display);
+      font-size: 3rem;
+      color: rgba(245,200,66,0.08);
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      line-height: 1;
+      pointer-events: none;
+      transition: color var(--transicion);
+    }
+
+    .servicio:hover .servicio__num { color: rgba(245,200,66,0.15); }
+
+    .servicio__icono {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .servicio__nombre {
+      font-family: var(--fuente-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blanco-papel);
+      margin-bottom: 0.5rem;
+    }
+
+    .servicio__desc {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.82rem;
+      color: var(--gris-texto);
+      line-height: 1.7;
+    }
+
+    /* ======================================================
+       SOBRE NOSOTROS — layout asimétrico
+    ====================================================== */
+    .sobre__grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 700px) {
+      .sobre__grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .sobre__parrafo {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.95rem;
+      color: var(--gris-claro);
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+
+    .sobre__parrafo strong {
+      color: var(--blanco-papel);
+      font-weight: 700;
+    }
+
+    /* Panel de datos técnicos */
+    .sobre__datos {
+      border: 1px solid var(--gris-linea);
+      padding: 2rem;
+    }
+
+    .sobre__dato {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--gris-linea);
+    }
+
+    .sobre__dato:last-child { border-bottom: none; }
+
+    .sobre__dato-label {
+      font-family: var(--fuente-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amarillo-geo);
+      margin-bottom: 0.25rem;
+    }
+
+    .sobre__dato-valor {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.9rem;
+      color: var(--blanco-papel);
+    }
+
+    /* ======================================================
+       FRANJA — declaración
+    ====================================================== */
+    .franja {
+      background: var(--amarillo-geo);
+      padding: 3.5rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .franja__texto {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      color: var(--negro-mapa);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      max-width: 800px;
+    }
+
+    .franja__texto em {
+      font-style: italic;
+      opacity: 0.6;
+    }
+
+    /* ======================================================
+       CONTACTO
+    ====================================================== */
+    .contacto__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--gris-linea);
+      border: 1px solid var(--gris-linea);
+    }
+
+    @media (max-width: 600px) {
+      .contacto__grid { grid-template-columns: 1fr; }
+    }
+
+    .contacto__bloque {
+      background: var(--negro-mapa);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contacto__tipo {
+      font-family: var(--fuente-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--amarillo-geo);
+    }
+
+    .contacto__valor {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: 0.05em;
+      color: var(--blanco-papel);
+    }
+
+    .contacto__desc {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.82rem;
+      font-style: italic;
+      color: var(--gris-texto);
+    }
+
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+    .footer {
+      padding: 2rem 0;
+      border-top: 1px solid var(--gris-linea);
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer__logo {
+      font-family: var(--fuente-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      color: var(--gris-texto);
+    }
+
+    .footer__copy {
+      font-family: var(--fuente-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(138,155,170,0.5);
+    }
+
+    .footer__magnus {
+      font-family: var(--fuente-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: rgba(245,200,66,0.4);
+      text-transform: uppercase;
+    }
+
+    /* ======================================================
+       ANIMACIONES
+    ====================================================== */
+    @keyframes entradaHero {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal--d1 { transition-delay: 0.1s; }
+    .reveal--d2 { transition-delay: 0.2s; }
+    .reveal--d3 { transition-delay: 0.3s; }
+    .reveal--d4 { transition-delay: 0.4s; }
+
+    /* Animación de rotación suave para el logo */
+    @keyframes girarLento {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ======================================================
+       RESPONSIVE — ajustes finos
+    ====================================================== */
+    @media (max-width: 480px) {
+      .hero__titulo { font-size: 4.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================
+       NAV
+  ===================================================== -->
+  <nav class="nav">
+    <div class="contenedor nav__inner">
+
+      <div class="nav__logo">
+        <div>
+          <div class="nav__logo-texto">GEOPROJECT</div>
+          <div class="nav__logo-sub">Topografía e Ingeniería</div>
+        </div>
+      </div>
+
+      <!-- Volver al holding principal -->
+      <a href="index.html" class="nav__volver">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M10 3L5 8l5 5"/>
+        </svg>
+        Magnus Holding
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- =====================================================
+       HERO
+  ===================================================== -->
+  <section class="hero" id="inicio">
+    <div class="contenedor" style="display:contents;">
+
+      <!-- Texto izquierdo -->
+      <div class="hero__texto contenedor" style="padding-left:4%; padding-right:2rem;">
+        <div class="coord">5°31'54"N  73°21'42"W · Boyacá, Colombia</div>
+        <div class="linea-geo" style="max-width:200px;"></div>
+
+        <h1 class="hero__titulo">
+          GEO
+          <span class="acento">PRO</span>
+          JECT
+        </h1>
+
+        <p class="hero__sub">
+          Transformamos datos del terreno en información precisa para la
+          toma de decisiones. Topografía, ingeniería y tecnología geoespacial
+          al servicio del territorio boyacense.
+        </p>
+
+        <div class="hero__ctas">
+          <a href="https://wa.me/573208614264?text=Hola%2C+quiero+información+sobre+los+servicios+de+GeoProject"
+             target="_blank" rel="noopener" class="btn btn--whatsapp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Solicitar Cotización
+          </a>
+          <a href="#servicios" class="btn btn--secundario">Ver Servicios</a>
+        </div>
+      </div>
+
+      <!-- Panel derecho — logo -->
+      <div class="hero__panel">
+        <div class="hero__marco">
+          <!--
+            Logo de GeoProject.
+            Reemplazar src con la ruta real de la imagen:
+            <img src="img/geoproject-logo.png" alt="GeoProject Logo" class="hero__logo-img">
+            Por ahora se usa la imagen subida en base64 o puedes referenciarla localmente.
+          -->
+          <img
+            src="1780172194924_image.png"
+            alt="GeoProject — Topografía e Ingeniería"
+            class="hero__logo-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback si no carga la imagen -->
+          <div style="display:none; width:280px; height:280px; border:1px solid rgba(245,200,66,0.2); align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:4rem; color:rgba(245,200,66,0.3); letter-spacing:0.1em;">GEO</div>
+        </div>
+
+        <div class="hero__coords">
+          <span>LAT: 05°31'54.2"N</span>
+          <span>LON: 073°21'42.8"W</span>
+          <span>ALT: 2.782 m.s.n.m.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SERVICIOS
+  ===================================================== -->
+  <section class="seccion" id="servicios">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <div class="coord">Catálogo técnico</div>
+        <h2 class="sec__titulo">SERVICIOS</h2>
+        <p class="sec__desc">
+          Soluciones topográficas y geoespaciales para proyectos de construcción,
+          ingeniería, catastro y ordenamiento territorial en Boyacá.
+        </p>
+      </div>
+
+      <div class="servicios__grid">
+
+        <div class="servicio reveal reveal--d1">
+          <div class="servicio__num">01</div>
+          <div class="servicio__icono">📐</div>
+          <div class="servicio__nombre">Levantamientos Topográficos</div>
+          <div class="servicio__desc">Planimetría y altimetría de terrenos con instrumentos de alta precisión. Medición y representación fiel del relieve.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d2">
+          <div class="servicio__num">02</div>
+          <div class="servicio__icono">🛰️</div>
+          <div class="servicio__nombre">Georreferenciación</div>
+          <div class="servicio__desc">Localización y referenciación de predios, límites e infraestructura con tecnología GPS de precisión sub-métrica.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d3">
+          <div class="servicio__num">03</div>
+          <div class="servicio__icono">🏗️</div>
+          <div class="servicio__nombre">Replanteos para Construcción</div>
+          <div class="servicio__desc">Materialización en campo de proyectos arquitectónicos e ingenieriles. Control de ejes, cotas y alineamientos.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d4">
+          <div class="servicio__num">04</div>
+          <div class="servicio__icono">🗺️</div>
+          <div class="servicio__nombre">Curvas de Nivel y MDT</div>
+          <div class="servicio__desc">Generación de modelos digitales del terreno, curvas de nivel y visualizaciones 3D para análisis de drenaje y volumetría.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d1">
+          <div class="servicio__num">05</div>
+          <div class="servicio__icono">🖥️</div>
+          <div class="servicio__nombre">SIG — Sistemas de Información Geográfica</div>
+          <div class="servicio__desc">Integración de capas geoespaciales, análisis territorial y gestión de bases de datos cartográficas para proyectos complejos.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d2">
+          <div class="servicio__num">06</div>
+          <div class="servicio__icono">📋</div>
+          <div class="servicio__nombre">Planos y Cartografía Digital</div>
+          <div class="servicio__desc">Elaboración de planos topográficos, cartografía digital y documentación técnica para licencias y trámites municipales.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d3">
+          <div class="servicio__num">07</div>
+          <div class="servicio__icono">⚖️</div>
+          <div class="servicio__nombre">Deslinde y Amojonamiento</div>
+          <div class="servicio__desc">Definición y materialización de linderos prediales. Apoyo técnico para resolución de conflictos territoriales y catastro.</div>
+        </div>
+
+        <div class="servicio reveal reveal--d4">
+          <div class="servicio__num">08</div>
+          <div class="servicio__icono">📊</div>
+          <div class="servicio__nombre">Análisis e Informes Técnicos</div>
+          <div class="servicio__desc">Procesamiento geoespacial, análisis de datos territoriales y generación de informes técnicos para proyectos de ingeniería civil.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FRANJA DECLARACIÓN
+  ===================================================== -->
+  <div class="franja">
+    <div class="contenedor">
+      <p class="franja__texto reveal">
+        Cada metro cuadrado de Boyacá <em>tiene una historia.</em><br>
+        Nosotros la medimos con precisión.
+      </p>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       SOBRE NOSOTROS
+  ===================================================== -->
+  <section class="seccion seccion--alt" id="nosotros">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <div class="coord">Perfil de empresa</div>
+        <h2 class="sec__titulo">QUIÉNES SOMOS</h2>
+      </div>
+
+      <div class="sobre__grid">
+
+        <div>
+          <p class="sobre__parrafo reveal">
+            <strong>GeoProject</strong> es una empresa de topografía e ingeniería geoespacial
+            con base en Boyacá, Colombia. Nació de la experiencia técnica de dos ingenieros
+            comprometidos con transformar la forma en que se mide y se entiende el territorio regional.
+          </p>
+          <p class="sobre__parrafo reveal reveal--d1">
+            Combinamos los métodos tradicionales de la topografía de campo con herramientas
+            digitales modernas: <strong>SIG, cartografía digital, modelos 3D del terreno</strong>
+            y gestión de bases de datos geográficas. El resultado es información precisa que
+            permite tomar mejores decisiones en proyectos de construcción, catastro,
+            ordenamiento territorial e ingeniería civil.
+          </p>
+          <p class="sobre__parrafo reveal reveal--d2">
+            GeoProject hace parte del ecosistema <strong>Magnus Holding</strong> — una estructura
+            empresarial construida en Boyacá con visión de expansión regional. Esta alianza
+            nos permite integrarnos con capacidades tecnológicas, redes estratégicas y
+            recursos que potencian cada proyecto.
+          </p>
+        </div>
+
+        <!-- Ficha técnica -->
+        <div class="sobre__datos reveal reveal--d2">
+          <div class="sobre__dato">
+            <div class="sobre__dato-label">Sector</div>
+            <div class="sobre__dato-valor">Topografía e Ingeniería</div>
+          </div>
+          <div class="sobre__dato">
+            <div class="sobre__dato-label">Especialidad</div>
+            <div class="sobre__dato-valor">Geomática y SIG</div>
+          </div>
+          <div class="sobre__dato">
+            <div class="sobre__dato-label">Cobertura</div>
+            <div class="sobre__dato-valor">Tunja y Boyacá</div>
+          </div>
+          <div class="sobre__dato">
+            <div class="sobre__dato-label">Equipo</div>
+            <div class="sobre__dato-valor">2 Ingenieros fundadores</div>
+          </div>
+          <div class="sobre__dato">
+            <div class="sobre__dato-label">Grupo empresarial</div>
+            <div class="sobre__dato-valor">Magnus Holding</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       CONTACTO
+  ===================================================== -->
+  <section class="seccion" id="contacto">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal" style="text-align:center; max-width:500px; margin-inline:auto;">
+        <div class="coord" style="justify-content:center;">Canal de contacto directo</div>
+        <h2 class="sec__titulo">COTIZAR</h2>
+        <p class="sec__desc" style="margin-inline:auto;">
+          Cuéntanos las características de tu terreno o proyecto.
+          Respondemos con rapidez y precisión.
+        </p>
+      </div>
+
+      <div class="contacto__grid reveal">
+
+        <!-- WhatsApp -->
+        <div class="contacto__bloque">
+          <div class="contacto__tipo">WhatsApp directo</div>
+          <div class="contacto__valor">320 861 4264</div>
+          <div class="contacto__desc">Respuesta rápida. Cotizaciones sin costo.</div>
+          <a href="https://wa.me/573208614264?text=Hola%2C+quiero+información+sobre+los+servicios+de+GeoProject"
+             target="_blank" rel="noopener" class="btn btn--whatsapp" style="width:fit-content; margin-top:0.5rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Escribir ahora
+          </a>
+        </div>
+
+        <!-- Facebook -->
+        <div class="contacto__bloque">
+          <div class="contacto__tipo">Redes sociales</div>
+          <div class="contacto__valor">Facebook</div>
+          <div class="contacto__desc">Portafolio de proyectos, actualizaciones y trabajos recientes en campo.</div>
+          <a href="https://www.facebook.com/share/1CnXWAwPcj/"
+             target="_blank" rel="noopener" class="btn btn--secundario" style="width:fit-content; margin-top:0.5rem;">
+            Ver perfil →
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+  ===================================================== -->
+  <footer class="footer">
+    <div class="contenedor footer__inner">
+      <span class="footer__logo">GEOPROJECT</span>
+      <span class="footer__copy">© 2025 GeoProject · Tunja, Boyacá</span>
+      <a href="index.html" class="footer__magnus">Magnus Holding ↗</a>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       JS — Scroll reveal
+  ===================================================== -->
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(el){ el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
