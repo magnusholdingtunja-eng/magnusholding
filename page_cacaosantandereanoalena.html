@@ -1,1 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ALENA Cacao Santandereano — Cacao 100% natural y artesanal de Landázuri, Santander. Sin azúcar, sin sal, pura tradición cacaotera colombiana." />
+  <title>ALENA · Cacao Santandereano · El Alma del Cacao</title>
 
+  <!-- Tipografías: Playfair Display (cálido, orgánico) + DM Sans (legible, moderno) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ======================================================
+       VARIABLES — Cacao: oscuros cálidos + crema + tierra roja
+    ====================================================== */
+    :root {
+      --cacao-negro:    #1A0F08;   /* fondo principal — oscuro cálido */
+      --cacao-oscuro:   #2C1A0E;   /* secciones alternas */
+      --cacao-medio:    #4A2C18;   /* bordes / cards */
+      --cacao-claro:    #7A4A2E;   /* acento marrón */
+      --tierra-roja:    #8B3A20;   /* acento tierra */
+      --oro-cacao:      #C8882A;   /* dorado cálido — acento principal */
+      --oro-suave:      #E8B86A;   /* oro claro */
+      --crema:          #F5EDD8;   /* texto principal */
+      --crema-suave:    #E8DCC8;   /* texto secundario */
+      --beige-cacao:    #D4C4A8;   /* texto terciario */
+      --verde-hoja:     #3D5A2C;   /* acento hoja / naturaleza */
+      --verde-suave:    #5A7A42;   /* verde más claro */
+
+      --fuente-display: 'Playfair Display', Georgia, serif;
+      --fuente-cuerpo:  'DM Sans', sans-serif;
+      --transicion:     0.3s ease;
+      --max-ancho:      1080px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cacao-negro);
+      color: var(--crema);
+      font-family: var(--fuente-cuerpo);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ======================================================
+       TEXTURA — granos de cacao como patrón de fondo
+       (círculos pequeños irregulares, evoca pepas de cacao)
+    ====================================================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 15% 25%, rgba(200,136,42,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 75%, rgba(74,44,24,0.4) 0%, transparent 55%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cellipse cx='20' cy='18' rx='5' ry='7' fill='rgba(200,136,42,0.025)' transform='rotate(-20,20,18)'/%3E%3Cellipse cx='70' cy='55' rx='4' ry='6' fill='rgba(200,136,42,0.02)' transform='rotate(15,70,55)'/%3E%3Cellipse cx='100' cy='90' rx='5' ry='8' fill='rgba(200,136,42,0.025)' transform='rotate(-30,100,90)'/%3E%3Cellipse cx='40' cy='95' rx='3' ry='5' fill='rgba(200,136,42,0.018)' transform='rotate(10,40,95)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ======================================================
+       UTILIDADES
+    ====================================================== */
+    .contenedor {
+      width: 92%;
+      max-width: var(--max-ancho);
+      margin-inline: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .etiqueta {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--oro-cacao);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .etiqueta::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--oro-cacao);
+    }
+
+    .separador {
+      width: 40px; height: 1px;
+      background: var(--oro-cacao);
+      margin: 1.5rem 0;
+    }
+
+    .separador--centro { margin-inline: auto; }
+
+    /* ======================================================
+       NAV
+    ====================================================== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem 0;
+      background: rgba(26,15,8,0.96);
+      border-bottom: 1px solid rgba(200,136,42,0.15);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__marca {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav__nombre {
+      font-family: var(--fuente-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--crema);
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+    }
+
+    .nav__sub {
+      font-family: var(--fuente-display);
+      font-size: 0.6rem;
+      font-style: italic;
+      color: var(--oro-cacao);
+      letter-spacing: 0.08em;
+    }
+
+    .nav__links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,0.5);
+      transition: color var(--transicion);
+    }
+
+    .nav__links a:hover { color: var(--oro-suave); }
+
+    .nav__volver {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,0.35);
+      transition: color var(--transicion);
+    }
+
+    .nav__volver:hover { color: var(--oro-cacao); }
+    .nav__volver svg { width: 10px; height: 10px; }
+
+    @media (max-width: 640px) { .nav__links { display: none; } }
+
+    /* ======================================================
+       HERO
+    ====================================================== */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      padding-top: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    /* Forma orgánica de fondo — evoca montaña */
+    .hero__bg-forma {
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%;
+      height: 100%;
+      background: var(--cacao-oscuro);
+      clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+
+    @media (max-width: 700px) {
+      .hero__bg-forma { display: none; }
+    }
+
+    .hero__texto {
+      padding: 5rem 0;
+      position: relative;
+      z-index: 2;
+      animation: aparecer 1s ease both;
+    }
+
+    .hero__origen {
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(200,136,42,0.7);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero__origen::before {
+      content: '🌱';
+      font-size: 0.8rem;
+    }
+
+    .hero__nombre {
+      font-family: var(--fuente-display);
+      font-size: clamp(4rem, 11vw, 8.5rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      color: var(--crema);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero__subtitulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(1rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--oro-suave);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero__slogan {
+      font-family: var(--fuente-display);
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+      font-style: italic;
+      color: rgba(245,237,216,0.5);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .hero__tags {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero__tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgba(200,136,42,0.3);
+      color: var(--oro-cacao);
+      border-radius: 20px;
+    }
+
+    .hero__ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Panel derecho — visual cacao */
+    .hero__visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 2rem;
+      animation: aparecer 1.1s ease 0.2s both;
+    }
+
+    @media (max-width: 700px) {
+      .hero__visual { padding: 2rem 0; }
+    }
+
+    /* Ilustración SVG de granos de cacao como placeholder visual */
+    .cacao-ilustracion {
+      width: min(300px, 72vw);
+      height: min(300px, 72vw);
+      position: relative;
+    }
+
+    .cacao-ilustracion svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero__origen-badge {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .hero__origen-lugar {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--crema);
+      letter-spacing: 0.06em;
+    }
+
+    .hero__origen-desc {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(200,136,42,0.6);
+      margin-top: 0.25rem;
+    }
+
+    /* ======================================================
+       BOTONES
+    ====================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.85rem;
+      font-family: var(--fuente-cuerpo);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transicion);
+    }
+
+    .btn--oro {
+      background: var(--oro-cacao);
+      color: var(--cacao-negro);
+    }
+
+    .btn--oro:hover {
+      background: var(--oro-suave);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(200,136,42,0.35);
+    }
+
+    .btn--outline {
+      background: transparent;
+      color: var(--crema);
+      border: 1px solid rgba(245,237,216,0.2);
+    }
+
+    .btn--outline:hover {
+      border-color: var(--oro-cacao);
+      color: var(--oro-cacao);
+    }
+
+    .btn--whatsapp {
+      background: #1B3A2A;
+      color: #4ade80;
+      border: 1px solid rgba(74,222,128,0.2);
+    }
+
+    .btn--whatsapp:hover {
+      background: #22503a;
+      box-shadow: 0 6px 20px rgba(74,222,128,0.15);
+    }
+
+    /* ======================================================
+       SECCIONES
+    ====================================================== */
+    .seccion {
+      padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+      border-top: 1px solid rgba(74,44,24,0.5);
+      position: relative;
+      z-index: 2;
+    }
+
+    .seccion--oscura { background: var(--cacao-oscuro); }
+    .seccion--media  { background: var(--cacao-medio); }
+
+    .sec__cab { margin-bottom: 3rem; }
+    .sec__cab--centro { text-align: center; }
+
+    .sec__titulo {
+      font-family: var(--fuente-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--crema);
+      margin-top: 0.75rem;
+    }
+
+    .sec__titulo em {
+      font-style: italic;
+      color: var(--oro-suave);
+    }
+
+    .sec__desc {
+      font-size: 0.9rem;
+      color: var(--beige-cacao);
+      max-width: 520px;
+      margin-top: 0.75rem;
+      line-height: 1.85;
+    }
+
+    /* ======================================================
+       DIFERENCIADORES — 3 pilares
+    ====================================================== */
+    .pilares__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(74,44,24,0.6);
+      border: 1px solid rgba(74,44,24,0.6);
+    }
+
+    @media (max-width: 620px) {
+      .pilares__grid { grid-template-columns: 1fr; }
+    }
+
+    .pilar {
+      background: var(--cacao-negro);
+      padding: 3rem 2.25rem;
+      transition: background var(--transicion);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pilar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--oro-cacao);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .pilar:hover { background: var(--cacao-oscuro); }
+    .pilar:hover::after { transform: scaleX(1); }
+
+    .pilar__icono {
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .pilar__titulo {
+      font-family: var(--fuente-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--crema);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .pilar__texto {
+      font-size: 0.85rem;
+      color: var(--beige-cacao);
+      line-height: 1.8;
+    }
+
+    /* ======================================================
+       PRODUCTOS — línea de presentaciones
+    ====================================================== */
+    .productos__intro {
+      font-family: var(--fuente-display);
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      font-style: italic;
+      color: rgba(245,237,216,0.65);
+      max-width: 600px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    .productos__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .producto {
+      border: 1px solid rgba(200,136,42,0.2);
+      padding: 2.25rem 1.75rem;
+      transition: all var(--transicion);
+      position: relative;
+      background: rgba(44,26,14,0.5);
+    }
+
+    .producto:hover {
+      border-color: var(--oro-cacao);
+      background: rgba(44,26,14,0.8);
+      transform: translateY(-3px);
+    }
+
+    .producto__emoji { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+
+    .producto__nombre {
+      font-family: var(--fuente-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--crema);
+      margin-bottom: 0.5rem;
+    }
+
+    .producto__desc {
+      font-size: 0.82rem;
+      color: var(--beige-cacao);
+      line-height: 1.75;
+    }
+
+    .producto__badge {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--oro-cacao);
+      border: 1px solid rgba(200,136,42,0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    /* ======================================================
+       BANNER — frase central
+    ====================================================== */
+    .banner {
+      background: var(--cacao-medio);
+      padding: clamp(3rem, 7vw, 6rem) 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(200,136,42,0.15);
+      border-bottom: 1px solid rgba(200,136,42,0.15);
+    }
+
+    /* Círculos decorativos — granos grandes de fondo */
+    .banner::before {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(200,136,42,0.06);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .banner::after {
+      content: '';
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(200,136,42,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .banner__frase {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--crema);
+      line-height: 1.35;
+      max-width: 720px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .banner__frase .acento { color: var(--oro-suave); }
+
+    .banner__sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(200,136,42,0.5);
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ======================================================
+       HISTORIA / ORIGEN
+    ====================================================== */
+    .origen__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 680px) {
+      .origen__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .origen__parrafo {
+      font-size: 0.92rem;
+      color: var(--beige-cacao);
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+
+    .origen__parrafo strong { color: var(--crema); font-weight: 500; }
+
+    /* Mapa / datos de origen */
+    .origen__datos {
+      border: 1px solid rgba(200,136,42,0.2);
+      overflow: hidden;
+    }
+
+    .origen__dato {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid rgba(200,136,42,0.12);
+      transition: background var(--transicion);
+    }
+
+    .origen__dato:last-child { border-bottom: none; }
+    .origen__dato:hover { background: rgba(44,26,14,0.5); }
+
+    .origen__dato-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--oro-cacao);
+      margin-bottom: 0.3rem;
+    }
+
+    .origen__dato-valor {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--crema);
+    }
+
+    /* ======================================================
+       CONTACTO
+    ====================================================== */
+    .contacto__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 580px) {
+      .contacto__grid { grid-template-columns: 1fr; }
+    }
+
+    .contacto__bloque {
+      border: 1px solid rgba(200,136,42,0.18);
+      padding: 2.25rem 2rem;
+      transition: border-color var(--transicion);
+    }
+
+    .contacto__bloque:hover { border-color: rgba(200,136,42,0.45); }
+
+    .contacto__tipo {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--oro-cacao);
+      margin-bottom: 0.75rem;
+    }
+
+    .contacto__valor {
+      font-family: var(--fuente-display);
+      font-size: clamp(1.2rem, 3vw, 1.75rem);
+      font-weight: 600;
+      color: var(--crema);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .contacto__desc {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--beige-cacao);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ======================================================
+       FOOTER
+    ====================================================== */
+    .footer {
+      padding: 2.25rem 0;
+      border-top: 1px solid rgba(74,44,24,0.6);
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer__marca {
+      font-family: var(--fuente-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: rgba(245,237,216,0.4);
+      letter-spacing: 0.06em;
+    }
+
+    .footer__copy {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: rgba(245,237,216,0.25);
+    }
+
+    .footer__magnus {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(200,136,42,0.35);
+      transition: color var(--transicion);
+    }
+
+    .footer__magnus:hover { color: var(--oro-cacao); }
+
+    /* ======================================================
+       ANIMACIONES
+    ====================================================== */
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal--d1 { transition-delay: 0.1s; }
+    .reveal--d2 { transition-delay: 0.2s; }
+    .reveal--d3 { transition-delay: 0.3s; }
+    .reveal--d4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================
+       NAV
+  =================================================== -->
+  <nav class="nav">
+    <div class="contenedor nav__inner">
+      <div class="nav__marca">
+        <span class="nav__nombre">ALENA</span>
+        <span class="nav__sub">El alma del Cacao Santandereano</span>
+      </div>
+      <ul class="nav__links">
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#origen">Origen</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a href="index.html" class="nav__volver">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg>
+        Magnus Holding
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===================================================
+       HERO
+  =================================================== -->
+  <section class="hero" id="inicio">
+    <div class="hero__bg-forma"></div>
+    <div class="contenedor" style="display:contents;">
+
+      <div class="hero__texto contenedor" style="padding-left:4%; padding-right:2rem;">
+
+        <div class="hero__origen">Landázuri, Santander · Tunja, Boyacá · Colombia</div>
+
+        <h1 class="hero__nombre">ALENA</h1>
+        <p class="hero__subtitulo">Cacao Santandereano</p>
+        <p class="hero__slogan">
+          "El alma del Cacao Santandereano"<br>
+          Artesanal · Puro · Sin aditivos
+        </p>
+
+        <div class="hero__tags">
+          <span class="hero__tag">100% Natural</span>
+          <span class="hero__tag">Sin azúcar</span>
+          <span class="hero__tag">Sin sal</span>
+          <span class="hero__tag">Artesanal</span>
+          <span class="hero__tag">Origen Santander</span>
+        </div>
+
+        <div class="hero__ctas">
+          <a href="https://wa.me/573005041257?text=Hola%2C+me+interesa+conocer+los+productos+ALENA+Cacao+Santandereano"
+             target="_blank" rel="noopener" class="btn btn--whatsapp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Pedir ahora
+          </a>
+          <a href="#productos" class="btn btn--outline">Ver productos</a>
+        </div>
+      </div>
+
+      <!-- Panel derecho — ilustración granos de cacao SVG -->
+      <div class="hero__visual">
+        <div class="cacao-ilustracion">
+          <!--
+            Reemplazar con imagen real del producto:
+            <img src="img/alena-producto.jpg" alt="ALENA Cacao Santandereano" style="border-radius:4px;">
+          -->
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Fondo circular -->
+            <circle cx="150" cy="150" r="145" fill="rgba(44,26,14,0.6)" stroke="rgba(200,136,42,0.2)" stroke-width="1"/>
+            <circle cx="150" cy="150" r="125" fill="none" stroke="rgba(200,136,42,0.08)" stroke-width="1"/>
+
+            <!-- Granos de cacao grandes (centro) -->
+            <ellipse cx="150" cy="145" rx="38" ry="58" fill="rgba(122,74,46,0.9)" stroke="rgba(200,136,42,0.4)" stroke-width="1.5" transform="rotate(-8,150,145)"/>
+            <!-- Venas del grano central -->
+            <line x1="150" y1="92" x2="150" y2="198" stroke="rgba(200,136,42,0.3)" stroke-width="1"/>
+            <line x1="125" y1="115" x2="175" y2="115" stroke="rgba(200,136,42,0.2)" stroke-width="0.8"/>
+            <line x1="118" y1="135" x2="182" y2="135" stroke="rgba(200,136,42,0.2)" stroke-width="0.8"/>
+            <line x1="120" y1="155" x2="180" y2="155" stroke="rgba(200,136,42,0.2)" stroke-width="0.8"/>
+            <line x1="125" y1="175" x2="175" y2="175" stroke="rgba(200,136,42,0.2)" stroke-width="0.8"/>
+
+            <!-- Grano izquierdo -->
+            <ellipse cx="88" cy="138" rx="24" ry="38" fill="rgba(100,58,32,0.85)" stroke="rgba(200,136,42,0.3)" stroke-width="1" transform="rotate(15,88,138)"/>
+            <line x1="88" y1="102" x2="88" y2="175" stroke="rgba(200,136,42,0.2)" stroke-width="0.8"/>
+
+            <!-- Grano derecho -->
+            <ellipse cx="212" cy="142" rx="22" ry="36" fill="rgba(100,58,32,0.85)" stroke="rgba(200,136,42,0.3)" stroke-width="1" transform="rotate(-12,212,142)"/>
+            <line x1="212" y1="108" x2="212" y2="177" stroke="rgba(200,136,42,0.2)" stroke-width="0.8"/>
+
+            <!-- Granos pequeños esquinas -->
+            <ellipse cx="120" cy="210" rx="16" ry="26" fill="rgba(80,44,20,0.7)" stroke="rgba(200,136,42,0.2)" stroke-width="1" transform="rotate(-25,120,210)"/>
+            <ellipse cx="188" cy="205" rx="14" ry="22" fill="rgba(80,44,20,0.7)" stroke="rgba(200,136,42,0.2)" stroke-width="1" transform="rotate(20,188,205)"/>
+            <ellipse cx="148" cy="72" rx="12" ry="20" fill="rgba(80,44,20,0.65)" stroke="rgba(200,136,42,0.2)" stroke-width="1" transform="rotate(5,148,72)"/>
+
+            <!-- Hojas decorativas -->
+            <path d="M60 80 Q80 55 100 70 Q80 75 60 80Z" fill="rgba(61,90,44,0.6)" stroke="rgba(90,122,66,0.3)" stroke-width="0.8"/>
+            <path d="M220 70 Q240 50 255 68 Q235 72 220 70Z" fill="rgba(61,90,44,0.5)" stroke="rgba(90,122,66,0.3)" stroke-width="0.8"/>
+            <path d="M55 215 Q68 238 85 225 Q70 218 55 215Z" fill="rgba(61,90,44,0.5)" stroke="rgba(90,122,66,0.3)" stroke-width="0.8"/>
+
+            <!-- Texto central sutil -->
+            <text x="150" y="260" font-family="Georgia,serif" font-size="11" font-style="italic"
+                  fill="rgba(200,136,42,0.45)" text-anchor="middle" letter-spacing="3">ALENA</text>
+          </svg>
+        </div>
+
+        <div class="hero__origen-badge">
+          <div class="hero__origen-lugar">Landázuri, Santander</div>
+          <div class="hero__origen-desc">Tierra de gran tradición cacaotera</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       PILARES DIFERENCIADORES
+  =================================================== -->
+  <section class="seccion" id="diferencia">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <span class="etiqueta">¿Por qué ALENA?</span>
+        <h2 class="sec__titulo">La diferencia está<br><em>en la pureza</em></h2>
+      </div>
+
+      <div class="pilares__grid">
+
+        <div class="pilar reveal reveal--d1">
+          <span class="pilar__icono">🌿</span>
+          <div class="pilar__titulo">100% Natural · Sin aditivos</div>
+          <div class="pilar__texto">
+            Nuestro cacao llega a ti exactamente como la tierra lo entrega.
+            Sin azúcar añadida, sin sal, sin conservantes. La pureza absoluta
+            del grano es nuestra promesa irrenunciable.
+          </div>
+        </div>
+
+        <div class="pilar reveal reveal--d2">
+          <span class="pilar__icono">🤲</span>
+          <div class="pilar__titulo">Mano campesina y legado artesanal</div>
+          <div class="pilar__texto">
+            Cada grano viene de las montañas de Landázuri, Santander — tierra de
+            tradición cacaotera. Valoramos el trabajo del campo y preservamos
+            el legado artesanal de nuestra cultura colombiana.
+          </div>
+        </div>
+
+        <div class="pilar reveal reveal--d3">
+          <span class="pilar__icono">⚖️</span>
+          <div class="pilar__titulo">Tu cantidad, tu medida</div>
+          <div class="pilar__texto">
+            Manejamos diferentes presentaciones por gramaje para que compres
+            exactamente lo que necesitas. Sin desperdicios, con la
+            flexibilidad que merece un producto artesanal de calidad.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       PRODUCTOS
+  =================================================== -->
+  <section class="seccion seccion--oscura" id="productos">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <span class="etiqueta">Línea de productos</span>
+        <h2 class="sec__titulo">Cacao en <em>su estado más puro</em></h2>
+      </div>
+
+      <p class="productos__intro reveal">
+        Derivados del cacao 100% natural y artesanal. Cultivado con amor,
+        procesado con respeto por la tradición de nuestra tierra.
+      </p>
+
+      <div class="productos__grid">
+
+        <div class="producto reveal reveal--d1">
+          <span class="producto__emoji">🍫</span>
+          <div class="producto__nombre">Pasta de Cacao Pura</div>
+          <div class="producto__desc">
+            Masa de cacao puro sin ningún aditivo. Base fundamental para preparaciones
+            de chocolate artesanal, bebidas calientes y repostería saludable.
+          </div>
+          <span class="producto__badge">Sin azúcar · Sin sal</span>
+        </div>
+
+        <div class="producto reveal reveal--d2">
+          <span class="producto__emoji">🫘</span>
+          <div class="producto__nombre">Granos de Cacao Natural</div>
+          <div class="producto__desc">
+            Granos seleccionados directamente de los cultivos de Landázuri.
+            Ideales para tostado propio, preparaciones artesanales y consumo
+            directo como snack saludable.
+          </div>
+          <span class="producto__badge">Origen Santander</span>
+        </div>
+
+        <div class="producto reveal reveal--d3">
+          <span class="producto__emoji">🥄</span>
+          <div class="producto__nombre">Cacao en Polvo Artesanal</div>
+          <div class="producto__desc">
+            Polvo de cacao puro sin azúcar ni sal. Alto contenido de antioxidantes,
+            magnesio y flavonoides. Para bebidas, recetas y cuidado personal.
+          </div>
+          <span class="producto__badge">Alta pureza</span>
+        </div>
+
+        <div class="producto reveal reveal--d4">
+          <span class="producto__emoji">📦</span>
+          <div class="producto__nombre">Presentaciones por Gramaje</div>
+          <div class="producto__desc">
+            Varias presentaciones disponibles para que compres exactamente
+            lo que necesitas. Desde uso personal hasta pedidos para
+            negocios y emprendimientos gastronómicos.
+          </div>
+          <span class="producto__badge">A tu medida</span>
+        </div>
+
+      </div>
+
+      <div style="margin-top:2.5rem; text-align:center;" class="reveal">
+        <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:0.9rem; color:rgba(245,237,216,0.45); margin-bottom:1.25rem;">
+          Catálogo digital en desarrollo — escríbenos para conocer disponibilidad y precios
+        </p>
+        <a href="https://wa.me/573005041257?text=Hola%2C+quiero+ver+el+catálogo+completo+de+ALENA+Cacao+Santandereano"
+           target="_blank" rel="noopener" class="btn btn--oro">Ver catálogo completo</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       BANNER FRASE
+  =================================================== -->
+  <div class="banner">
+    <div class="contenedor">
+      <p class="banner__frase reveal">
+        "Cacao artesanal y puro de Landázuri,<br>
+        <span class="acento">cultivado con amor y respeto</span><br>
+        por la tradición de nuestra tierra."
+      </p>
+      <p class="banner__sub reveal reveal--d2">ALENA · Cacao Santandereano · Colombia</p>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       ORIGEN
+  =================================================== -->
+  <section class="seccion" id="origen">
+    <div class="contenedor">
+
+      <div class="sec__cab reveal">
+        <span class="etiqueta">De dónde venimos</span>
+        <h2 class="sec__titulo">Raíces en <em>Landázuri, Santander</em></h2>
+      </div>
+
+      <div class="origen__grid">
+
+        <div>
+          <p class="origen__parrafo reveal">
+            <strong>ALENA</strong> nació del amor por la tierra cacaotera de
+            <strong>Landázuri, Santander</strong> — una región con décadas de tradición
+            en el cultivo de uno de los cacaos más apreciados de Colombia.
+          </p>
+          <p class="origen__parrafo reveal reveal--d1">
+            La marca comenzó su consolidación y lanzamiento comercial en
+            <strong>enero de 2026</strong>, trayendo a Tunja y Boyacá lo mejor
+            del cacao santandereano con un enfoque claro: <strong>bienestar integral,
+            alimentación limpia y respeto por el origen artesanal.</strong>
+          </p>
+          <p class="origen__parrafo reveal reveal--d2">
+            Hoy llegan directamente al cliente a través de canales de cercanía —
+            WhatsApp, grupos de mercado y voz a voz — porque la confianza
+            se construye persona a persona, igual que se cultiva el cacao:
+            con paciencia, cuidado y respeto.
+          </p>
+        </div>
+
+        <div class="origen__datos reveal reveal--d2">
+          <div class="origen__dato">
+            <div class="origen__dato-label">Origen del cultivo</div>
+            <div class="origen__dato-valor">Landázuri, Santander</div>
+          </div>
+          <div class="origen__dato">
+            <div class="origen__dato-label">Operación y distribución</div>
+            <div class="origen__dato-valor">Tunja, Boyacá</div>
+          </div>
+          <div class="origen__dato">
+            <div class="origen__dato-label">Lanzamiento comercial</div>
+            <div class="origen__dato-valor">Enero 2026</div>
+          </div>
+          <div class="origen__dato">
+            <div class="origen__dato-label">Producto</div>
+            <div class="origen__dato-valor">100% Natural · Sin aditivos</div>
+          </div>
+          <div class="origen__dato">
+            <div class="origen__dato-label">Grupo empresarial</div>
+            <div class="origen__dato-valor">Magnus Holding</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       CONTACTO
+  =================================================== -->
+  <section class="seccion seccion--oscura" id="contacto">
+    <div class="contenedor">
+
+      <div class="sec__cab sec__cab--centro reveal">
+        <span class="etiqueta" style="justify-content:center;">Pedir o consultar</span>
+        <h2 class="sec__titulo">Contáctanos</h2>
+        <p class="sec__desc" style="margin-inline:auto; text-align:center;">
+          ¿Quieres pedir cacao, conocer precios o hacer un pedido empresarial?
+          La atención es directa y personalizada.
+        </p>
+      </div>
+
+      <div class="contacto__grid">
+
+        <div class="contacto__bloque reveal reveal--d1">
+          <div class="contacto__tipo">WhatsApp · Atención directa</div>
+          <div class="contacto__valor">300 504 1257</div>
+          <div class="contacto__desc">Canal principal. Cotizaciones, pedidos y consultas.</div>
+          <a href="https://wa.me/573005041257?text=Hola%2C+me+interesa+conocer+los+productos+ALENA+Cacao+Santandereano"
+             target="_blank" rel="noopener" class="btn btn--whatsapp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Escribir ahora
+          </a>
+        </div>
+
+        <div class="contacto__bloque reveal reveal--d2">
+          <div class="contacto__tipo">Correo electrónico</div>
+          <div class="contacto__valor" style="font-size:clamp(0.9rem,2vw,1.2rem);">alenavalledeoro@gmail.com</div>
+          <div class="contacto__desc">Para pedidos empresariales, alianzas y catálogo digital.</div>
+          <a href="mailto:alenavalledeoro@gmail.com" class="btn btn--outline" style="margin-top:0.25rem;">
+            Enviar correo →
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       FOOTER
+  =================================================== -->
+  <footer class="footer">
+    <div class="contenedor footer__inner">
+      <span class="footer__marca">ALENA</span>
+      <span class="footer__copy">© 2026 ALENA Cacao Santandereano · Landázuri – Tunja</span>
+      <a href="index.html" class="footer__magnus">Magnus Holding ↗</a>
+    </div>
+  </footer>
+
+  <!-- ===================================================
+       JS — Scroll reveal
+  =================================================== -->
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function(el){ el.classList.add('visible'); });
+        return;
+      }
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
