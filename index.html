@@ -3,1068 +3,483 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Magnus Holding — Soluciones estratégicas en Boyacá. Alianzas, proyectos y estructura empresarial desde Tunja." />
-  <meta name="author" content="Magnus Holding" />
-  <title>Magnus Holding — Tunja, Boyacá</title>
-
-  <!-- =====================================================
-       TIPOGRAFÍA — Google Fonts
-       Cormorant Garamond: elegante, serif de alto contraste
-       Jost: geométrica, limpia para cuerpo y UI
-  ====================================================== -->
+  <meta name="description" content="Magnus Holding - Estructura empresarial estrategica en Boyaca. Renace. Lidera. Conquista." />
+  <title>Magnus Holding - Tunja, Boyaca</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ===================================================
-       VARIABLES GLOBALES — Paleta "old money"
-       Editar aquí para cambiar toda la identidad visual
-    =================================================== */
     :root {
-      --azul-profundo:   #0D1B2A;   /* fondo principal */
-      --azul-medio:      #162033;   /* tarjetas / secciones alternas */
-      --azul-borde:      #1E2D42;   /* bordes sutiles */
-      --carbon:          #111518;   /* negro cálido */
-      --dorado:          #C9A84C;   /* acento dorado */
-      --dorado-suave:    #E8D5A3;   /* dorado claro para texto destacado */
-      --blanco-hueso:    #F5F0E8;   /* texto principal */
-      --gris-plata:      #8A9BB0;   /* texto secundario */
-      --gris-claro:      #B8C8D8;   /* texto terciario */
-
-      --fuente-display:  'Cormorant Garamond', Georgia, serif;
-      --fuente-ui:       'Jost', sans-serif;
-
-      --radio:           2px;       /* bordes angulares — old money no redondea */
-      --max-ancho:       1100px;
-      --transicion:      0.35s ease;
-    }
-
-    /* ===================================================
-       RESET & BASE
-    =================================================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      background-color: var(--azul-profundo);
-      color: var(--blanco-hueso);
-      font-family: var(--fuente-ui);
-      font-weight: 300;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    img { max-width: 100%; display: block; }
-
-    /* ===================================================
-       UTILIDADES
-    =================================================== */
-    .contenedor {
-      width: 90%;
-      max-width: var(--max-ancho);
-      margin-inline: auto;
-    }
-
-    .separador {
-      width: 48px;
-      height: 1px;
-      background: var(--dorado);
-      margin: 1.5rem 0;
-    }
-
-    .separador--centro {
-      margin-inline: auto;
-    }
-
-    .etiqueta {
-      font-family: var(--fuente-ui);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--dorado);
-    }
-
-    /* ===================================================
-       NAVEGACIÓN
-    =================================================== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 1.4rem 0;
-      background: linear-gradient(to bottom, rgba(13,27,42,0.97) 70%, transparent);
-      border-bottom: 1px solid rgba(201,168,76,0.12);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .nav__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    /* Logotipo en texto — reemplazar con <img> si se tiene SVG */
-    .nav__logo {
-      font-family: var(--fuente-display);
-      font-size: 1.25rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--blanco-hueso);
-    }
-
-    .nav__logo span {
-      color: var(--dorado);
-    }
-
-    .nav__links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav__links a {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gris-plata);
-      transition: color var(--transicion);
-    }
-
-    .nav__links a:hover { color: var(--dorado); }
-
-    /* Ocultar links en móvil pequeño */
-    @media (max-width: 600px) {
-      .nav__links { display: none; }
-    }
-
-    /* ===================================================
-       HERO SECTION
-    =================================================== */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding-top: 5rem;
-    }
-
-    /* Textura de fondo — líneas diagonales sutiles */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 60px,
-          rgba(201,168,76,0.025) 60px,
-          rgba(201,168,76,0.025) 61px
-        );
-      pointer-events: none;
-    }
-
-    /* Brillo esquina superior derecha */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -200px;
-      right: -100px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero__contenido {
-      position: relative;
-      z-index: 2;
-      max-width: 780px;
-      animation: fadeUp 1s ease both;
-    }
-
-    .hero__titulo {
-      font-family: var(--fuente-display);
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      font-weight: 300;
-      line-height: 1.15;
-      letter-spacing: 0.01em;
-      color: var(--blanco-hueso);
-      margin-bottom: 1.5rem;
-    }
-
-    .hero__titulo em {
-      font-style: italic;
-      color: var(--dorado-suave);
-    }
-
-    .hero__subtitulo {
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: var(--gris-claro);
-      max-width: 520px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero__ubicacion {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris-plata);
-      margin-bottom: 3rem;
-    }
-
-    .hero__ubicacion::before {
-      content: '';
-      width: 20px;
-      height: 1px;
-      background: var(--dorado);
-      flex-shrink: 0;
-    }
-
-    .hero__ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* ===================================================
-       BOTONES
-    =================================================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      font-family: var(--fuente-ui);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      border-radius: var(--radio);
-      transition: all var(--transicion);
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn--primario {
-      background: var(--dorado);
-      color: var(--carbon);
-    }
-
-    .btn--primario:hover {
-      background: var(--dorado-suave);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(201,168,76,0.25);
-    }
-
-    .btn--secundario {
-      background: transparent;
-      color: var(--blanco-hueso);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .btn--secundario:hover {
-      border-color: var(--dorado);
-      color: var(--dorado);
-    }
-
-    .btn--whatsapp {
-      background: #1a3a2a;
-      color: #4ade80;
-      border: 1px solid rgba(74,222,128,0.2);
-    }
-
-    .btn--whatsapp:hover {
-      background: #1f4733;
-      box-shadow: 0 8px 24px rgba(74,222,128,0.15);
-    }
-
-    /* ===================================================
-       SECCIONES — estructura común
-    =================================================== */
-    .seccion {
-      padding: clamp(5rem, 10vw, 9rem) 0;
-      border-top: 1px solid var(--azul-borde);
-    }
-
-    .seccion--alt {
-      background: var(--azul-medio);
-    }
-
-    .seccion__cabecera {
-      margin-bottom: 3.5rem;
-    }
-
-    .seccion__cabecera--centro {
-      text-align: center;
-    }
-
-    .seccion__titulo {
-      font-family: var(--fuente-display);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 300;
-      line-height: 1.2;
-      color: var(--blanco-hueso);
-      margin-top: 0.75rem;
-    }
-
-    .seccion__descripcion {
-      font-size: 0.95rem;
-      color: var(--gris-claro);
-      max-width: 520px;
-      margin-top: 1rem;
-      line-height: 1.8;
-    }
-
-    /* ===================================================
-       ALIADOS ESTRATÉGICOS — grid de logos
-    =================================================== */
-    .aliados__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5px; /* efecto de separación con fondo */
-      background: var(--azul-borde);
-      border: 1px solid var(--azul-borde);
-    }
-
-    .aliado__card {
-      background: var(--azul-profundo);
-      padding: 2.5rem 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-      transition: background var(--transicion);
-      text-decoration: none;
-    }
-
-    .aliado__card:hover {
-      background: var(--azul-medio);
-    }
-
-    /* ── Placeholder logo ── */
-    /* Reemplazar .aliado__logo-placeholder con <img src="logo.svg" alt="Nombre"> */
-    .aliado__logo-placeholder {
-      width: 56px;
-      height: 56px;
-      border: 1px solid rgba(201,168,76,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--fuente-display);
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--dorado);
-      flex-shrink: 0;
-    }
-
-    .aliado__info {}
-
-    .aliado__nombre {
-      font-family: var(--fuente-display);
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--blanco-hueso);
-    }
-
-    .aliado__sector {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gris-plata);
-      margin-top: 0.25rem;
-    }
-
-    /* ===================================================
-       PROYECTO DESTACADO — GeoProject
-    =================================================== */
-    .proyecto__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid var(--azul-borde);
-    }
-
-    @media (max-width: 700px) {
-      .proyecto__grid { grid-template-columns: 1fr; }
-    }
-
-    .proyecto__imagen {
-      background: var(--azul-medio);
-      min-height: 320px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Patrón topográfico SVG inline como fondo decorativo */
-    .proyecto__imagen::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Ccircle cx='200' cy='200' r='180' fill='none' stroke='rgba(201,168,76,0.08)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='140' fill='none' stroke='rgba(201,168,76,0.08)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='100' fill='none' stroke='rgba(201,168,76,0.1)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='60' fill='none' stroke='rgba(201,168,76,0.12)' stroke-width='1'/%3E%3Ccircle cx='200' cy='200' r='20' fill='none' stroke='rgba(201,168,76,0.18)' stroke-width='1'/%3E%3C/svg%3E");
-      background-size: 80%;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .proyecto__icono-geo {
-      font-family: var(--fuente-display);
-      font-size: 5rem;
-      color: rgba(201,168,76,0.2);
-      position: relative;
-      z-index: 1;
-      letter-spacing: -0.05em;
-    }
-
-    .proyecto__contenido {
-      padding: 3.5rem 3rem;
-      background: var(--azul-profundo);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    @media (max-width: 700px) {
-      .proyecto__contenido { padding: 2.5rem 1.8rem; }
-    }
-
-    .proyecto__tag {
-      display: inline-block;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid rgba(201,168,76,0.3);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dorado);
-      margin-bottom: 1.5rem;
-      width: fit-content;
-    }
-
-    .proyecto__nombre {
-      font-family: var(--fuente-display);
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      font-weight: 300;
-      line-height: 1.2;
-      color: var(--blanco-hueso);
-      margin-bottom: 1rem;
-    }
-
-    .proyecto__desc {
-      font-size: 0.9rem;
-      color: var(--gris-claro);
-      line-height: 1.85;
-      margin-bottom: 2rem;
-    }
-
-    .proyecto__detalles {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .proyecto__detalle {
-      display: flex;
-      align-items: baseline;
-      gap: 0.75rem;
-      font-size: 0.8rem;
-      color: var(--gris-plata);
-    }
-
-    .proyecto__detalle::before {
-      content: '—';
-      color: var(--dorado);
-      flex-shrink: 0;
-    }
-
-    /* ===================================================
-       CREDIBILIDAD — métricas y pilares
-    =================================================== */
-    .credibilidad__metricas {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5px;
-      background: var(--azul-borde);
-      border: 1px solid var(--azul-borde);
-      margin-bottom: 5rem;
-    }
-
-    .metrica {
-      background: var(--azul-profundo);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: background var(--transicion);
-    }
-
-    .metrica:hover { background: var(--azul-medio); }
-
-    .metrica__numero {
-      font-family: var(--fuente-display);
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 300;
-      color: var(--dorado);
-      line-height: 1;
-    }
-
-    .metrica__label {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gris-plata);
-      margin-top: 0.75rem;
-      line-height: 1.5;
-    }
-
-    /* Pilares / valores */
-    .credibilidad__pilares {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2rem;
-    }
-
-    .pilar {
-      border-left: 1px solid rgba(201,168,76,0.3);
-      padding-left: 1.5rem;
-    }
-
-    .pilar__titulo {
-      font-family: var(--fuente-display);
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--blanco-hueso);
-      margin-bottom: 0.5rem;
-    }
-
-    .pilar__texto {
-      font-size: 0.85rem;
-      color: var(--gris-plata);
-      line-height: 1.75;
-    }
-
-    /* ===================================================
-       MANIFIESTO — bloque de cita
-    =================================================== */
-    .manifiesto {
-      padding: clamp(4rem, 8vw, 7rem) 0;
-      background: var(--carbon);
-      border-top: 1px solid var(--azul-borde);
-      border-bottom: 1px solid var(--azul-borde);
-      text-align: center;
-    }
-
-    .manifiesto__cita {
-      font-family: var(--fuente-display);
-      font-size: clamp(1.5rem, 4vw, 2.6rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--blanco-hueso);
-      max-width: 800px;
-      margin-inline: auto;
-      line-height: 1.4;
-    }
-
-    .manifiesto__cita span {
-      color: var(--dorado);
-    }
-
-    .manifiesto__atrib {
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gris-plata);
-      margin-top: 1.5rem;
-    }
-
-    /* ===================================================
-       CONTACTO
-    =================================================== */
-    .contacto {
-      text-align: center;
-    }
-
-    .contacto .seccion__descripcion {
-      margin-inline: auto;
-    }
-
-    .contacto__acciones {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2.5rem;
-    }
-
-    .contacto__datos {
-      margin-top: 3rem;
-      display: flex;
-      gap: 3rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .dato {
-      text-align: center;
-    }
-
-    .dato__label {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris-plata);
-      margin-bottom: 0.4rem;
-    }
-
-    .dato__valor {
-      font-family: var(--fuente-display);
-      font-size: 1rem;
-      color: var(--blanco-hueso);
-    }
-
-    /* ===================================================
-       FOOTER
-    =================================================== */
-    .footer {
-      padding: 2.5rem 0;
-      border-top: 1px solid var(--azul-borde);
-    }
-
-    .footer__inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer__logo {
-      font-family: var(--fuente-display);
-      font-size: 1rem;
-      color: var(--gris-plata);
-    }
-
-    .footer__copy {
-      font-size: 0.72rem;
-      color: var(--gris-plata);
-      letter-spacing: 0.05em;
-    }
-
-    .footer__loc {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(138,155,176,0.5);
-    }
-
-    /* ===================================================
-       ANIMACIONES
-    =================================================== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0);    }
-    }
-
-    /* Reveal al hacer scroll — clase añadida por JS */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Retrasos escalonados */
-    .reveal--d1 { transition-delay: 0.1s; }
-    .reveal--d2 { transition-delay: 0.2s; }
-    .reveal--d3 { transition-delay: 0.3s; }
-    .reveal--d4 { transition-delay: 0.4s; }
-    .reveal--d5 { transition-delay: 0.5s; }
+      --negro:#080808; --negro-c:#0E0C0A; --negro-m:#161410; --negro-b:#222018; --carbon:#1A1815;
+      --oro:#C9A84C; --oro-b:#E2C06A; --oro-p:#F0DFA8; --oro-o:#8A6A28;
+      --crema:#F2EDE0; --crema-s:#D4CCBA; --gris:#8A8070; --rojo:#8B1A1A;
+      --D:'Cormorant Garamond',Georgia,serif; --U:'Jost',sans-serif;
+      --gap:1.5px; --max:1100px; --t:0.35s ease;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--negro-c);color:var(--crema);font-family:var(--U);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;display:block;}
+
+    .contenedor{width:90%;max-width:var(--max);margin-inline:auto;position:relative;z-index:2;}
+    .tag{font-family:var(--U);font-size:.62rem;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--oro);display:inline-flex;align-items:center;gap:.75rem;}
+    .tag::before{content:'';width:24px;height:1px;background:var(--oro);flex-shrink:0;}
+    .sep{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--oro),transparent);margin:1.5rem auto;}
+
+    /* === NAV === */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 0;background:rgba(8,8,8,.97);border-bottom:1px solid rgba(201,168,76,.1);backdrop-filter:blur(16px);}
+    .nav-in{display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{display:flex;align-items:center;gap:.85rem;}
+    .nav-mini{width:36px;height:36px;flex-shrink:0;}
+    .nav-nom{font-family:var(--D);font-size:1.05rem;font-weight:600;letter-spacing:.1em;color:var(--crema);line-height:1.1;}
+    .nav-nom span{color:var(--oro);}
+    .nav-lem{font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,168,76,.42);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(242,237,224,.38);transition:color var(--t);}
+    .nav-links a:hover{color:var(--oro-b);}
+    @media(max-width:600px){.nav-links{display:none;}}
+
+    /* === HERO === */
+    .hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding-top:5rem;position:relative;overflow:hidden;}
+    @media(max-width:720px){.hero{grid-template-columns:1fr;}}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(201,168,76,.07) 0%,transparent 55%),radial-gradient(ellipse at 10% 80%,rgba(139,26,26,.04) 0%,transparent 40%);pointer-events:none;}
+    .hero-vl{position:absolute;top:8%;bottom:8%;left:50%;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.12),transparent);pointer-events:none;}
+    @media(max-width:720px){.hero-vl{display:none;}}
+
+    .hero-txt{padding:5rem 0;animation:subir 1s ease both;position:relative;z-index:2;}
+    .hero-cor{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.52);margin-bottom:1.75rem;display:flex;align-items:center;gap:.75rem;}
+    .hero-cor::before{content:'';width:20px;height:1px;background:var(--oro);}
+    .hero-h1{font-family:var(--D);font-size:clamp(3rem,7vw,5.8rem);font-weight:300;line-height:1;letter-spacing:.02em;color:var(--crema);margin-bottom:.5rem;}
+    .hero-h1 em{font-style:italic;color:var(--oro-b);}
+    .hero-h1 strong{font-weight:600;display:block;}
+    .hero-triada{display:flex;gap:0;margin:2rem 0;border:1px solid rgba(201,168,76,.15);}
+    .hero-ti{flex:1;padding:.8rem 1rem;text-align:center;font-family:var(--D);font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--oro);border-right:1px solid rgba(201,168,76,.15);transition:background var(--t);}
+    .hero-ti:last-child{border-right:none;}
+    .hero-ti:hover{background:rgba(201,168,76,.05);}
+    .hero-sub{font-size:clamp(.88rem,1.8vw,1rem);color:var(--crema-s);max-width:440px;line-height:1.85;margin-bottom:2.5rem;}
+    .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+
+    .hero-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5rem 2rem;position:relative;z-index:2;animation:subir 1.1s ease .25s both;}
+    @media(max-width:720px){.hero-panel{padding:2rem 0 4rem;}}
+    .hero-escudo{width:min(300px,72vw);position:relative;}
+    .hero-escudo::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:120%;height:120%;background:radial-gradient(circle,rgba(201,168,76,.09) 0%,transparent 65%);border-radius:50%;pointer-events:none;}
+    .hero-escudo svg{width:100%;height:auto;filter:drop-shadow(0 12px 40px rgba(0,0,0,.65));position:relative;z-index:1;}
+    .hero-nota{margin-top:1.5rem;text-align:center;font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.32);}
+
+    /* === BOTONES === */
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;font-family:var(--U);font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:none;transition:all var(--t);}
+    .btn-oro{background:var(--oro);color:var(--negro);}
+    .btn-oro:hover{background:var(--oro-b);transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.3);}
+    .btn-out{background:transparent;color:var(--crema);border:1px solid rgba(242,237,224,.2);}
+    .btn-out:hover{border-color:var(--oro);color:var(--oro);}
+    .btn-wa{background:#0e1f14;color:#4ade80;border:1px solid rgba(74,222,128,.2);}
+    .btn-wa:hover{background:#152b1d;box-shadow:0 6px 20px rgba(74,222,128,.1);}
+
+    /* === SECCIONES === */
+    .S{padding:clamp(5rem,10vw,9rem) 0;border-top:1px solid var(--negro-b);position:relative;z-index:2;}
+    .S-alt{background:var(--negro-m);}
+    .S-cab{margin-bottom:3.5rem;}
+    .S-cab-c{text-align:center;}
+    .S-h{font-family:var(--D);font-size:clamp(1.9rem,4vw,3rem);font-weight:300;line-height:1.15;color:var(--crema);margin-top:.75rem;}
+    .S-h em{font-style:italic;color:var(--oro-b);}
+    .S-p{font-size:.92rem;color:var(--crema-s);max-width:520px;margin-top:1rem;line-height:1.85;}
+
+    /* === ALIADOS === */
+    .ali-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--gap);background:var(--negro-b);border:1px solid var(--negro-b);}
+    .ali{background:var(--negro-c);padding:2.25rem 2rem;display:flex;flex-direction:column;align-items:flex-start;gap:1rem;transition:background var(--t);position:relative;overflow:hidden;}
+    .ali::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--oro),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease;}
+    .ali:hover{background:var(--negro-m);}
+    .ali:hover::before{transform:scaleX(1);}
+    .ali-ico{width:50px;height:50px;border:1px solid rgba(201,168,76,.22);display:flex;align-items:center;justify-content:center;font-family:var(--D);font-size:1rem;font-weight:600;color:var(--oro);flex-shrink:0;}
+    .ali-nom{font-family:var(--D);font-size:1rem;font-weight:400;color:var(--crema);}
+    .ali-sec{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gris);margin-top:.2rem;}
+    .ali-cta{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);margin-top:auto;transition:letter-spacing var(--t);}
+    .ali:hover .ali-cta{letter-spacing:.22em;}
+
+    /* === MANIFIESTO === */
+    .manif{background:var(--negro);padding:clamp(4rem,8vw,7rem) 0;border-top:1px solid rgba(201,168,76,.07);border-bottom:1px solid rgba(201,168,76,.07);position:relative;overflow:hidden;z-index:2;}
+    .manif-c{font-family:var(--D);font-size:clamp(1.5rem,3.8vw,2.8rem);font-weight:300;font-style:italic;color:var(--crema);line-height:1.35;max-width:820px;}
+    .manif-c span{color:var(--oro-b);font-style:normal;font-weight:600;}
+    .manif-f{margin-top:1.75rem;display:flex;align-items:center;gap:1rem;}
+    .manif-f::before{content:'';width:32px;height:1px;background:var(--oro);}
+    .manif-f span{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.42);}
+
+    /* === METRICAS === */
+    .mets{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap);background:var(--negro-b);border:1px solid var(--negro-b);margin-bottom:5rem;}
+    @media(max-width:640px){.mets{grid-template-columns:repeat(2,1fr);}}
+    .met{background:var(--negro-c);padding:2.75rem 2rem;text-align:center;transition:background var(--t);}
+    .met:hover{background:var(--negro-m);}
+    .met-n{font-family:var(--D);font-size:clamp(2.5rem,5vw,3.8rem);font-weight:300;color:var(--oro);line-height:1;}
+    .met-l{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gris);margin-top:.6rem;line-height:1.5;}
+
+    /* === PILARES === */
+    .pils{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.25rem;}
+    .pil{border-left:2px solid rgba(201,168,76,.18);padding-left:1.5rem;transition:border-color var(--t);}
+    .pil:hover{border-color:var(--oro);}
+    .pil-n{font-size:.58rem;letter-spacing:.22em;color:var(--oro-o);margin-bottom:.5rem;text-transform:uppercase;}
+    .pil-t{font-family:var(--D);font-size:1.1rem;font-weight:600;color:var(--crema);margin-bottom:.6rem;line-height:1.3;}
+    .pil-p{font-size:.84rem;color:var(--crema-s);line-height:1.8;}
+
+    /* === IDENTIDAD LEON === */
+    .iden{background:var(--negro);padding:clamp(5rem,10vw,9rem) 0;border-top:1px solid rgba(201,168,76,.07);position:relative;z-index:2;text-align:center;overflow:hidden;}
+    .iden::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,168,76,.06) 0%,transparent 60%);pointer-events:none;}
+    .iden-leon{width:min(260px,60vw);margin:2rem auto;filter:drop-shadow(0 0 40px rgba(201,168,76,.12));}
+    .iden-fr{font-family:var(--D);font-size:clamp(1.2rem,3.5vw,2.2rem);font-weight:300;font-style:italic;color:var(--crema-s);line-height:1.4;max-width:600px;margin-inline:auto;}
+    .iden-fr strong{font-style:normal;font-weight:600;color:var(--oro-b);}
+
+    /* === CONTACTO === */
+    .con-g{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);background:var(--negro-b);border:1px solid var(--negro-b);}
+    @media(max-width:600px){.con-g{grid-template-columns:1fr;}}
+    .con-b{background:var(--negro-c);padding:2.75rem 2.5rem;display:flex;flex-direction:column;gap:.75rem;}
+    .con-ti{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--oro);}
+    .con-va{font-family:var(--D);font-size:clamp(1.3rem,3vw,1.9rem);font-weight:600;color:var(--crema);line-height:1.2;}
+    .con-de{font-size:.82rem;font-style:italic;color:var(--gris);}
+
+    /* === FOOTER === */
+    .foot{background:var(--negro);padding:2.5rem 0;border-top:1px solid rgba(201,168,76,.07);position:relative;z-index:2;}
+    .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .foot-lt{font-family:var(--D);font-size:.9rem;letter-spacing:.1em;color:rgba(242,237,224,.22);}
+    .foot-lt span{color:rgba(201,168,76,.32);}
+    .foot-le{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,.2);font-style:italic;}
+    .foot-co{font-size:.58rem;color:rgba(242,237,224,.16);}
+
+    /* === ANIM === */
+    @keyframes subir{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
   </style>
 </head>
-
 <body>
 
-  <!-- ===================================================
-       NAVEGACIÓN
-  =================================================== -->
   <nav class="nav">
-    <div class="contenedor nav__inner">
-      <!-- Reemplazar texto con <img> si tienes logotipo SVG -->
-      <a href="#inicio" class="nav__logo">Magnus <span>Holding</span></a>
-      <ul class="nav__links">
+    <div class="contenedor nav-in">
+      <a href="#inicio" class="nav-logo">
+        <svg class="nav-mini" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 4 L52 14 L52 38 Q52 52 30 58 Q8 52 8 38 L8 14 Z" fill="rgba(8,8,8,.96)" stroke="rgba(201,168,76,.55)" stroke-width="1.5"/>
+          <path d="M30 11 L47 19 L47 38 Q47 50 30 55 Q13 50 13 38 L13 19 Z" fill="none" stroke="rgba(201,168,76,.15)" stroke-width=".8"/>
+          <text x="30" y="36" font-family="'Cormorant Garamond',serif" font-size="15" font-weight="700" fill="rgba(201,168,76,.95)" text-anchor="middle" letter-spacing="1">MH</text>
+        </svg>
+        <div>
+          <div class="nav-nom">Magnus <span>Holding</span></div>
+          <div class="nav-lem">Renace &middot; Lidera &middot; Conquista</div>
+        </div>
+      </a>
+      <ul class="nav-links">
         <li><a href="#aliados">Aliados</a></li>
-        <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- ===================================================
-       HERO
-  =================================================== -->
   <section class="hero" id="inicio">
-    <div class="contenedor">
-      <div class="hero__contenido">
+    <div class="hero-vl"></div>
+    <div class="contenedor" style="display:contents;">
 
-        <span class="etiqueta">Fundada en Tunja, Boyacá</span>
-
-        <div class="separador"></div>
-
-        <h1 class="hero__titulo">
-          Magnus Holding —<br>
-          <em>Soluciones Estratégicas</em><br>
-          en Boyacá
+      <div class="hero-txt contenedor" style="padding-left:5%;padding-right:3rem;">
+        <div class="hero-cor">Tunja &middot; Boyac&aacute; &middot; Colombia</div>
+        <h1 class="hero-h1">
+          Magnus<br>
+          <strong>Holding</strong><br>
+          <em>Soluciones Estrat&eacute;gicas</em>
         </h1>
-
-        <p class="hero__subtitulo">
-          Construimos estructura empresarial real en el corazón de Colombia.
-          Alianzas sólidas, proyectos con propósito y ejecución que genera valor
-          en la región.
+        <div class="hero-triada">
+          <div class="hero-ti">Renace</div>
+          <div class="hero-ti">Lidera</div>
+          <div class="hero-ti">Conquista</div>
+        </div>
+        <p class="hero-sub">
+          Estructura empresarial real en el coraz&oacute;n de Colombia.
+          Alianzas verificables, proyectos con nombre propio y ejecuci&oacute;n
+          que genera valor en Boyac&aacute;.
         </p>
-
-        <div class="hero__ubicacion">
-          Tunja · Boyacá · Colombia
+        <div class="hero-ctas">
+          <a href="#aliados" class="btn btn-oro">Ver alianzas</a>
+          <a href="#contacto" class="btn btn-out">Conversar</a>
         </div>
+      </div>
 
-        <div class="hero__ctas">
-          <a href="#aliados" class="btn btn--primario">Ver alianzas</a>
-          <a href="#contacto" class="btn btn--secundario">Conversar</a>
+      <div class="hero-panel">
+        <div class="hero-escudo">
+          <!-- Reemplazar por <img src="img/magnus-logo.png"> cuando tengas el PNG con fondo transparente -->
+          <svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="gO" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#E2C06A"/><stop offset="50%" stop-color="#C9A84C"/><stop offset="100%" stop-color="#8A6A28"/>
+              </linearGradient>
+              <linearGradient id="gL" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#D4A840"/><stop offset="100%" stop-color="#8A6A28"/>
+              </linearGradient>
+              <filter id="fs"><feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,.6)"/></filter>
+            </defs>
+            <!-- Escudo -->
+            <path d="M150 8 L278 52 L278 185 Q278 280 150 340 Q22 280 22 185 L22 52 Z" fill="#0A0808" stroke="url(#gO)" stroke-width="2.5" filter="url(#fs)"/>
+            <path d="M150 20 L265 60 L265 183 Q265 268 150 324 Q35 268 35 183 L35 60 Z" fill="none" stroke="rgba(201,168,76,.18)" stroke-width="1.2"/>
+            <path d="M150 30 L255 66 L255 182 Q255 260 150 312 Q45 260 45 182 L45 66 Z" fill="none" stroke="rgba(201,168,76,.07)" stroke-width=".8"/>
+            <!-- Melena -->
+            <ellipse cx="150" cy="118" rx="76" ry="80" fill="rgba(128,92,26,.2)"/>
+            <ellipse cx="86"  cy="74" rx="19" ry="14" fill="rgba(172,128,43,.4)"  transform="rotate(-30,86,74)"/>
+            <ellipse cx="110" cy="56" rx="17" ry="13" fill="rgba(175,130,40,.44)" transform="rotate(-10,110,56)"/>
+            <ellipse cx="150" cy="48" rx="19" ry="14" fill="rgba(178,132,42,.48)"/>
+            <ellipse cx="190" cy="56" rx="17" ry="13" fill="rgba(175,130,40,.44)" transform="rotate(10,190,56)"/>
+            <ellipse cx="214" cy="74" rx="19" ry="14" fill="rgba(172,128,43,.4)"  transform="rotate(30,214,74)"/>
+            <ellipse cx="75"  cy="104" rx="14" ry="19" fill="rgba(152,112,36,.34)" transform="rotate(-52,75,104)"/>
+            <ellipse cx="225" cy="104" rx="14" ry="19" fill="rgba(152,112,36,.34)" transform="rotate(52,225,104)"/>
+            <ellipse cx="76"  cy="138" rx="12" ry="16" fill="rgba(135,98,30,.28)"  transform="rotate(-65,76,138)"/>
+            <ellipse cx="224" cy="138" rx="12" ry="16" fill="rgba(135,98,30,.28)"  transform="rotate(65,224,138)"/>
+            <!-- Cabeza -->
+            <ellipse cx="150" cy="120" rx="54" ry="52" fill="url(#gL)"/>
+            <ellipse cx="150" cy="108" rx="34" ry="30" fill="rgba(215,170,63,.52)"/>
+            <!-- Hocico -->
+            <ellipse cx="150" cy="138" rx="25" ry="19" fill="rgba(180,136,50,.9)"/>
+            <ellipse cx="150" cy="129" rx="9" ry="6.5" fill="rgba(72,40,10,.85)"/>
+            <ellipse cx="145" cy="131" rx="2.5" ry="2" fill="rgba(42,20,5,.9)"/>
+            <ellipse cx="155" cy="131" rx="2.5" ry="2" fill="rgba(42,20,5,.9)"/>
+            <path d="M140 141 Q150 150 160 141" fill="none" stroke="rgba(42,20,5,.62)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="150" y1="136" x2="150" y2="142" stroke="rgba(42,20,5,.52)" stroke-width="1.5"/>
+            <line x1="124" y1="133" x2="141" y2="136" stroke="rgba(240,230,192,.62)" stroke-width="1" stroke-linecap="round"/>
+            <line x1="124" y1="138" x2="141" y2="138" stroke="rgba(240,230,192,.52)" stroke-width=".8" stroke-linecap="round"/>
+            <line x1="159" y1="136" x2="176" y2="133" stroke="rgba(240,230,192,.62)" stroke-width="1" stroke-linecap="round"/>
+            <line x1="159" y1="138" x2="176" y2="138" stroke="rgba(240,230,192,.52)" stroke-width=".8" stroke-linecap="round"/>
+            <!-- Ojos -->
+            <ellipse cx="126" cy="110" rx="12" ry="10" fill="rgba(20,12,3,.95)"/>
+            <ellipse cx="126" cy="110" rx="9" ry="7.5" fill="rgba(196,126,16,.9)"/>
+            <ellipse cx="126" cy="110" rx="4.5" ry="4.5" fill="rgba(6,3,1,.98)"/>
+            <ellipse cx="129" cy="107" rx="2.8" ry="2.2" fill="#8B1A1A" opacity=".92"/>
+            <ellipse cx="130" cy="106" rx="1.3" ry="1" fill="rgba(255,92,92,.7)"/>
+            <ellipse cx="174" cy="110" rx="12" ry="10" fill="rgba(20,12,3,.95)"/>
+            <ellipse cx="174" cy="110" rx="9" ry="7.5" fill="rgba(196,126,16,.9)"/>
+            <ellipse cx="174" cy="110" rx="4.5" ry="4.5" fill="rgba(6,3,1,.98)"/>
+            <ellipse cx="177" cy="107" rx="2.8" ry="2.2" fill="#8B1A1A" opacity=".92"/>
+            <ellipse cx="178" cy="106" rx="1.3" ry="1" fill="rgba(255,92,92,.7)"/>
+            <!-- Cejas -->
+            <path d="M115 102 Q126 97 137 102" fill="none" stroke="rgba(92,62,16,.62)" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M163 102 Q174 97 185 102" fill="none" stroke="rgba(92,62,16,.62)" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- Orejas -->
+            <path d="M96 80 Q90 60 107 70 Q110 84 103 89 Z" fill="rgba(196,156,50,.85)"/>
+            <path d="M100 80 Q96 65 107 72 Q109 83 105 87 Z" fill="rgba(152,96,36,.7)"/>
+            <path d="M204 80 Q210 60 193 70 Q190 84 197 89 Z" fill="rgba(196,156,50,.85)"/>
+            <path d="M200 80 Q204 65 193 72 Q191 83 195 87 Z" fill="rgba(152,96,36,.7)"/>
+            <!-- Texto escudo -->
+            <line x1="65" y1="195" x2="235" y2="195" stroke="rgba(201,168,76,.26)" stroke-width=".8"/>
+            <text x="150" y="218" font-family="'Cormorant Garamond',Georgia,serif" font-size="20" font-weight="700" fill="url(#gO)" text-anchor="middle" letter-spacing="6">MAGNUS</text>
+            <line x1="100" y1="226" x2="200" y2="226" stroke="rgba(201,168,76,.16)" stroke-width=".5"/>
+            <text x="150" y="246" font-family="'Cormorant Garamond',Georgia,serif" font-size="13" font-weight="300" fill="rgba(201,168,76,.62)" text-anchor="middle" letter-spacing="8">HOLDING</text>
+            <text x="150" y="270" font-family="serif" font-size="9" fill="rgba(201,168,76,.28)" text-anchor="middle" letter-spacing="10">&#9733; &#9733; &#9733;</text>
+            <text x="150" y="288" font-family="'Cormorant Garamond',Georgia,serif" font-size="7.5" font-style="italic" fill="rgba(201,168,76,.38)" text-anchor="middle" letter-spacing="2">Renace &middot; Lidera &middot; Conquista</text>
+            <!-- Esquinas ornamentales -->
+            <line x1="22" y1="52"  x2="44"  y2="52"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
+            <line x1="22" y1="52"  x2="22"  y2="74"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
+            <line x1="278" y1="52" x2="256" y2="52"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
+            <line x1="278" y1="52" x2="278" y2="74"  stroke="rgba(201,168,76,.4)" stroke-width="1.8"/>
+          </svg>
         </div>
-
+        <div class="hero-nota">Tunja &middot; Boyac&aacute; &middot; Colombia</div>
       </div>
     </div>
   </section>
 
-  <!-- ===================================================
-       ALIADOS ESTRATÉGICOS
-       ─ Reemplazar cada .aliado__logo-placeholder por:
-         <img src="ruta/logo.svg" alt="Nombre empresa">
-  =================================================== -->
-  <section class="seccion" id="aliados">
+  <!-- ALIADOS -->
+  <section class="S" id="aliados">
     <div class="contenedor">
-
-      <div class="seccion__cabecera reveal">
-        <span class="etiqueta">Red empresarial</span>
-        <h2 class="seccion__titulo">Aliados Estratégicos</h2>
-        <p class="seccion__descripcion">
-          Organizaciones con las que construimos proyectos, compartimos recursos
-          y generamos impacto en Boyacá.
-        </p>
+      <div class="S-cab reveal">
+        <span class="tag">Red empresarial</span>
+        <h2 class="S-h">Aliados <em>Estrat&eacute;gicos</em></h2>
+        <p class="S-p">Empresas con las que construimos proyectos, compartimos recursos y generamos impacto real en Boyac&aacute;.</p>
       </div>
-
-      <div class="aliados__grid">
-
-        <!-- ALIADO 1 — GeoProject -->
-        <a href="page_geoproject.html" class="aliado__card reveal reveal--d1" style="cursor:pointer;">
-          <div class="aliado__logo-placeholder">G</div>
-          <!-- Para imagen real: <img src="img/geoproject-logo.png" alt="GeoProject"> -->
-          <div class="aliado__info">
-            <div class="aliado__nombre">GeoProject</div>
-            <div class="aliado__sector">Topografía e Ingeniería</div>
-          </div>
-          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--dorado); margin-top:auto;">Ver empresa →</div>
+      <div class="ali-g">
+        <a href="page_geoproject.html" class="ali reveal d1">
+          <div class="ali-ico">G</div>
+          <div><div class="ali-nom">GeoProject</div><div class="ali-sec">Topograf&iacute;a e Ingenier&iacute;a</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
         </a>
-
-        <!-- ALIADO 2 — Huella Campesina -->
-        <a href="page_huellacampesina.html" class="aliado__card reveal reveal--d2">
-          <div class="aliado__logo-placeholder">H</div>
-          <div class="aliado__info">
-            <div class="aliado__nombre">Huella Campesina</div>
-            <div class="aliado__sector">Próximamente</div>
-          </div>
-          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--dorado); margin-top:auto;">Ver empresa →</div>
+        <a href="page_huellacampesina.html" class="ali reveal d2">
+          <div class="ali-ico">H</div>
+          <div><div class="ali-nom">Huella Campesina</div><div class="ali-sec">Pr&oacute;ximamente</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
         </a>
-
-        <!-- ALIADO 3 — ECA Creciendo Juntos -->
-        <a href="page_ecacreciendojuntos.html" class="aliado__card reveal reveal--d3">
-          <div class="aliado__logo-placeholder">E</div>
-          <div class="aliado__info">
-            <div class="aliado__nombre">ECA Creciendo Juntos</div>
-            <div class="aliado__sector">Servicios Socioambientales</div>
-          </div>
-          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--dorado); margin-top:auto;">Ver empresa →</div>
+        <a href="page_ecacreciendojuntos.html" class="ali reveal d3">
+          <div class="ali-ico">E</div>
+          <div><div class="ali-nom">ECA Creciendo Juntos</div><div class="ali-sec">Servicios Socioambientales</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
         </a>
-
-        <!-- ALIADO 4 — ALENA Cacao Santandereano -->
-        <a href="page_cacaosantandereanoalena.html" class="aliado__card reveal reveal--d4">
-          <div class="aliado__logo-placeholder">A</div>
-          <div class="aliado__info">
-            <div class="aliado__nombre">ALENA Cacao Santandereano</div>
-            <div class="aliado__sector">Cacao Artesanal · Alimentación</div>
-          </div>
-          <div style="font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--dorado); margin-top:auto;">Ver empresa →</div>
+        <a href="page_cacaosantandereanoalena.html" class="ali reveal d4">
+          <div class="ali-ico">A</div>
+          <div><div class="ali-nom">ALENA Cacao Santandereano</div><div class="ali-sec">Cacao Artesanal &middot; Alimentaci&oacute;n</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
         </a>
-
-        <!-- ALIADO 5 — opcional, eliminar si no se necesita -->
-        <div class="aliado__card reveal reveal--d5">
-          <div class="aliado__logo-placeholder">C</div>
-          <div class="aliado__info">
-            <div class="aliado__nombre">Aliado 5</div>
-            <div class="aliado__sector">Sector — Editar</div>
-          </div>
-        </div>
-
-      </div><!-- /aliados__grid -->
-
+        <a href="page_skyvisual.html" class="ali reveal d5">
+          <div class="ali-ico">SV</div>
+          <div><div class="ali-nom">Sky Visual</div><div class="ali-sec">Fotograf&iacute;a &amp; Contenido Digital</div></div>
+          <div class="ali-cta">Ver empresa &rarr;</div>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ===================================================
-       PROYECTO DESTACADO — GeoProject
-  =================================================== -->
-  <section class="seccion seccion--alt" id="proyectos">
+  <!-- MANIFIESTO -->
+  <div class="manif">
     <div class="contenedor">
-
-      <div class="seccion__cabecera reveal">
-        <span class="etiqueta">Proyecto destacado</span>
-        <h2 class="seccion__titulo">Empresas del Grupo</h2>
-      </div>
-
-      <div class="proyecto__grid reveal">
-
-        <!-- Panel izquierdo: imagen / ilustración -->
-        <div class="proyecto__imagen">
-          <!-- Reemplazar con <img src="img/geoproject.jpg" alt="GeoProject"> -->
-          <div class="proyecto__icono-geo">⌖</div>
-        </div>
-
-        <!-- Panel derecho: contenido -->
-        <div class="proyecto__contenido">
-          <span class="proyecto__tag">Servicios topográficos</span>
-          <h3 class="proyecto__nombre">GeoProject</h3>
-          <p class="proyecto__desc">
-            Empresa familiar de topografía y levantamientos técnicos con operaciones
-            en Boyacá. Presta servicios de medición de terrenos, cartografía,
-            levantamientos catastrales y soporte técnico para proyectos de
-            construcción e ingeniería civil en la región.
-          </p>
-          <div class="proyecto__detalles">
-            <div class="proyecto__detalle">Levantamientos planimétricos y altimétricos</div>
-            <div class="proyecto__detalle">Deslinde y amojonamiento predial</div>
-            <div class="proyecto__detalle">Cartografía para proyectos de construcción</div>
-            <div class="proyecto__detalle">Operación en Tunja y municipios de Boyacá</div>
-          </div>
-        </div>
-
-      </div><!-- /proyecto__grid -->
-
-    </div>
-  </section>
-
-  <!-- ===================================================
-       MANIFIESTO
-  =================================================== -->
-  <div class="manifiesto">
-    <div class="contenedor">
-      <p class="manifiesto__cita reveal">
-        "Construimos <span>estructura empresarial real</span> en Boyacá —
-        no promesas, sino alianzas verificables y proyectos con nombre propio."
-      </p>
-      <p class="manifiesto__atrib reveal reveal--d2">Magnus Holding · Tunja</p>
+      <p class="manif-c reveal">"Construimos <span>estructura empresarial real</span> en Boyac&aacute; &mdash;<br>no promesas, sino alianzas verificables y proyectos con nombre propio."</p>
+      <div class="manif-f reveal d2"><span>Magnus Holding &middot; Tunja, Boyac&aacute;</span></div>
     </div>
   </div>
 
-  <!-- ===================================================
-       CREDIBILIDAD — Nosotros
-  =================================================== -->
-  <section class="seccion" id="nosotros">
+  <!-- NOSOTROS -->
+  <section class="S S-alt" id="nosotros">
     <div class="contenedor">
-
-      <div class="seccion__cabecera seccion__cabecera--centro reveal">
-        <span class="etiqueta">Quiénes somos</span>
-        <h2 class="seccion__titulo">Estructura. Red. Ejecución.</h2>
-        <div class="separador separador--centro"></div>
+      <div class="S-cab S-cab-c reveal">
+        <span class="tag" style="justify-content:center;">Qui&eacute;nes somos</span>
+        <h2 class="S-h">Estructura. <em>Red.</em> Ejecuci&oacute;n.</h2>
+        <div class="sep"></div>
       </div>
-
-      <!-- Métricas / cifras -->
-      <div class="credibilidad__metricas">
-        <div class="metrica reveal reveal--d1">
-          <div class="metrica__numero">01</div>
-          <div class="metrica__label">Empresa activa<br>en el grupo</div>
+      <div class="mets">
+        <div class="met reveal d1"><div class="met-n">5+</div><div class="met-l">Alianzas<br>estrat&eacute;gicas</div></div>
+        <div class="met reveal d2"><div class="met-n">8</div><div class="met-l">Fases del<br>sistema Magnus</div></div>
+        <div class="met reveal d3"><div class="met-n">2026</div><div class="met-l">A&ntilde;o de<br>consolidaci&oacute;n</div></div>
+        <div class="met reveal d4"><div class="met-n">100%</div><div class="met-l">Boyac&aacute;<br>como base</div></div>
+      </div>
+      <div class="pils">
+        <div class="pil reveal d1">
+          <div class="pil-n">01 &mdash; Modelo</div>
+          <h3 class="pil-t">Holding Empresarial</h3>
+          <p class="pil-p">Una cabeza estrat&eacute;gica que agrupa empresas y proyectos independientes bajo una visi&oacute;n com&uacute;n. Cada unidad conserva autonomía operativa; Magnus aporta red, capital y direcci&oacute;n.</p>
         </div>
-        <div class="metrica reveal reveal--d2">
-          <div class="metrica__numero">5+</div>
-          <div class="metrica__label">Alianzas<br>estratégicas</div>
+        <div class="pil reveal d2">
+          <div class="pil-n">02 &mdash; Territorio</div>
+          <h3 class="pil-t">Ra&iacute;ces en Boyac&aacute;</h3>
+          <p class="pil-p">Tunja y Boyac&aacute; no son un punto de partida temporal &mdash; son el territorio donde construimos. Empresas que generan empleo, activos y referentes regionales a largo plazo.</p>
         </div>
-        <div class="metrica reveal reveal--d3">
-          <div class="metrica__numero">8</div>
-          <div class="metrica__label">Fases del sistema<br>Magnus</div>
+        <div class="pil reveal d3">
+          <div class="pil-n">03 &mdash; Sistema</div>
+          <h3 class="pil-t">8 Fases Operativas</h3>
+          <p class="pil-p">Input, An&aacute;lisis, Estrategia, Red, Ejecuci&oacute;n, Capital, Presencia y Feedback Loop. Un sistema completo de toma de decisiones y despliegue empresarial.</p>
         </div>
-        <div class="metrica reveal reveal--d4">
-          <div class="metrica__numero">100%</div>
-          <div class="metrica__label">Boyacá<br>como base</div>
+        <div class="pil reveal d4">
+          <div class="pil-n">04 &mdash; Palancas</div>
+          <h3 class="pil-t">Tecnolog&iacute;a Aplicada</h3>
+          <p class="pil-p">Automatizaci&oacute;n de procesos, plataformas de datos e inteligencia artificial para escalar operaciones sin escalar costos fijos.</p>
         </div>
       </div>
-
-      <!-- Pilares -->
-      <div class="credibilidad__pilares">
-
-        <div class="pilar reveal reveal--d1">
-          <h3 class="pilar__titulo">Holding Model</h3>
-          <p class="pilar__texto">
-            Magnus opera como una estructura holding: una cabeza estratégica que
-            agrupa empresas y proyectos independientes bajo una visión común.
-            Cada unidad conserva autonomía operativa; la holding aporta red,
-            capital y dirección.
-          </p>
-        </div>
-
-        <div class="pilar reveal reveal--d2">
-          <h3 class="pilar__titulo">Raíces Regionales</h3>
-          <p class="pilar__texto">
-            Tunja y Boyacá no son el punto de partida temporal — son el territorio
-            donde construimos. La apuesta es desarrollar empresas que generen
-            empleo, activos y referentes en la región a largo plazo.
-          </p>
-        </div>
-
-        <div class="pilar reveal reveal--d3">
-          <h3 class="pilar__titulo">Sistema de 8 Fases</h3>
-          <p class="pilar__texto">
-            Desde la entrada de información hasta el ciclo de retroalimentación,
-            Magnus opera con un sistema estructurado: Input, Análisis, Estrategia,
-            Red, Ejecución, Capital, Presencia y Feedback Loop.
-          </p>
-        </div>
-
-        <div class="pilar reveal reveal--d4">
-          <h3 class="pilar__titulo">Tecnología Aplicada</h3>
-          <p class="pilar__texto">
-            Automatización de procesos, plataformas de datos institucionales
-            y herramientas de inteligencia artificial como palancas para escalar
-            operaciones sin escalar costos fijos.
-          </p>
-        </div>
-
-      </div><!-- /pilares -->
-
     </div>
   </section>
 
-  <!-- ===================================================
-       CONTACTO
-  =================================================== -->
-  <section class="seccion seccion--alt" id="contacto">
-    <div class="contenedor contacto">
-
-      <div class="seccion__cabecera seccion__cabecera--centro reveal">
-        <span class="etiqueta">Hablemos</span>
-        <h2 class="seccion__titulo">Iniciar una Conversación</h2>
-        <p class="seccion__descripcion">
-          Si tienes un proyecto en Boyacá, buscas una alianza estratégica
-          o quieres conocer el sistema Magnus, escríbenos directamente.
-        </p>
+  <!-- IDENTIDAD LEON -->
+  <div class="iden">
+    <div class="contenedor" style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
+      <span class="tag" style="justify-content:center;">El s&iacute;mbolo de Magnus</span>
+      <div class="iden-leon reveal">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gL2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#D4A840"/><stop offset="100%" stop-color="#7A5820"/>
+            </linearGradient>
+            <radialGradient id="h2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(201,168,76,.1)"/><stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+            </radialGradient>
+          </defs>
+          <circle cx="100" cy="100" r="95" fill="url(#h2)"/>
+          <circle cx="100" cy="100" r="94" fill="none" stroke="rgba(201,168,76,.1)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(201,168,76,.05)" stroke-width=".8"/>
+          <ellipse cx="100" cy="88" rx="64" ry="66" fill="rgba(112,80,20,.26)"/>
+          <ellipse cx="50" cy="52" rx="16" ry="12" fill="rgba(155,110,30,.46)" transform="rotate(-25,50,52)"/>
+          <ellipse cx="70" cy="36" rx="14" ry="11" fill="rgba(160,116,34,.5)"   transform="rotate(-8,70,36)"/>
+          <ellipse cx="100" cy="30" rx="15" ry="12" fill="rgba(162,118,36,.54)"/>
+          <ellipse cx="130" cy="36" rx="14" ry="11" fill="rgba(160,116,34,.5)"  transform="rotate(8,130,36)"/>
+          <ellipse cx="150" cy="52" rx="16" ry="12" fill="rgba(155,110,30,.46)" transform="rotate(25,150,52)"/>
+          <ellipse cx="40"  cy="80" rx="12" ry="16" fill="rgba(140,98,26,.36)"  transform="rotate(-52,40,80)"/>
+          <ellipse cx="160" cy="80" rx="12" ry="16" fill="rgba(140,98,26,.36)"  transform="rotate(52,160,80)"/>
+          <ellipse cx="40"  cy="106" rx="10" ry="14" fill="rgba(124,86,22,.3)"  transform="rotate(-65,40,106)"/>
+          <ellipse cx="160" cy="106" rx="10" ry="14" fill="rgba(124,86,22,.3)"  transform="rotate(65,160,106)"/>
+          <ellipse cx="100" cy="90" rx="46" ry="44" fill="url(#gL2)"/>
+          <ellipse cx="100" cy="79" rx="30" ry="26" fill="rgba(210,162,60,.48)"/>
+          <ellipse cx="100" cy="106" rx="22" ry="17" fill="rgba(176,134,48,.9)"/>
+          <ellipse cx="100" cy="97"  rx="9"  ry="6"  fill="rgba(65,34,9,.85)"/>
+          <ellipse cx="95"  cy="99"  rx="2.3" ry="1.9" fill="rgba(40,18,4,.9)"/>
+          <ellipse cx="105" cy="99"  rx="2.3" ry="1.9" fill="rgba(40,18,4,.9)"/>
+          <path d="M91 109 Q100 116 109 109" fill="none" stroke="rgba(40,18,4,.6)" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="100" y1="103" x2="100" y2="109" stroke="rgba(40,18,4,.5)" stroke-width="1.3"/>
+          <line x1="79" y1="101" x2="92" y2="104" stroke="rgba(236,226,190,.6)" stroke-width=".9" stroke-linecap="round"/>
+          <line x1="79" y1="106" x2="92" y2="106" stroke="rgba(236,226,190,.5)" stroke-width=".7" stroke-linecap="round"/>
+          <line x1="108" y1="104" x2="121" y2="101" stroke="rgba(236,226,190,.6)" stroke-width=".9" stroke-linecap="round"/>
+          <line x1="108" y1="106" x2="121" y2="106" stroke="rgba(236,226,190,.5)" stroke-width=".7" stroke-linecap="round"/>
+          <ellipse cx="81"  cy="82" rx="10"  ry="8.5" fill="rgba(16,9,2,.95)"/>
+          <ellipse cx="81"  cy="82" rx="7.5" ry="6.5" fill="rgba(190,120,14,.9)"/>
+          <ellipse cx="81"  cy="82" rx="3.8" ry="3.8" fill="rgba(5,2,1,.98)"/>
+          <ellipse cx="84"  cy="79" rx="2.5" ry="2" fill="#8B1A1A" opacity=".92"/>
+          <ellipse cx="85"  cy="78" rx="1.1" ry=".9" fill="rgba(255,86,86,.7)"/>
+          <ellipse cx="119" cy="82" rx="10"  ry="8.5" fill="rgba(16,9,2,.95)"/>
+          <ellipse cx="119" cy="82" rx="7.5" ry="6.5" fill="rgba(190,120,14,.9)"/>
+          <ellipse cx="119" cy="82" rx="3.8" ry="3.8" fill="rgba(5,2,1,.98)"/>
+          <ellipse cx="122" cy="79" rx="2.5" ry="2" fill="#8B1A1A" opacity=".92"/>
+          <ellipse cx="123" cy="78" rx="1.1" ry=".9" fill="rgba(255,86,86,.7)"/>
+          <path d="M72 75 Q81 71 90 75" fill="none" stroke="rgba(86,56,12,.6)" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M110 75 Q119 71 128 75" fill="none" stroke="rgba(86,56,12,.6)" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M54 58 Q48 42 62 50 Q65 62 58 66 Z" fill="rgba(190,150,46,.85)"/>
+          <path d="M57 58 Q54 46 62 52 Q63 61 60 64 Z" fill="rgba(146,90,32,.7)"/>
+          <path d="M146 58 Q152 42 138 50 Q135 62 142 66 Z" fill="rgba(190,150,46,.85)"/>
+          <path d="M143 58 Q146 46 138 52 Q137 61 140 64 Z" fill="rgba(146,90,32,.7)"/>
+          <text x="100" y="156" font-family="'Cormorant Garamond',Georgia,serif" font-size="13" font-weight="700" fill="rgba(201,168,76,.72)" text-anchor="middle" letter-spacing="5">MAGNUS</text>
+          <line x1="52" y1="161" x2="148" y2="161" stroke="rgba(201,168,76,.16)" stroke-width=".7"/>
+          <text x="100" y="173" font-family="'Cormorant Garamond',Georgia,serif" font-size="8" font-weight="300" fill="rgba(201,168,76,.38)" text-anchor="middle" letter-spacing="4">HOLDING</text>
+        </svg>
       </div>
+      <p class="iden-fr reveal">El Le&oacute;n no persigue &mdash; <strong>&eacute;l espera, observa y act&uacute;a</strong><br>con precisi&oacute;n cuando llega el momento.</p>
+    </div>
+  </div>
 
-      <div class="contacto__acciones reveal">
-        <!--
-          WhatsApp — reemplazar el número:
-          https://wa.me/573XXXXXXXXX?text=Hola%2C+me+interesa+conocer+más+sobre+Magnus+Holding
-        -->
-        <a
-          href="https://wa.me/573000000000?text=Hola%2C+me+interesa+conocer+más+sobre+Magnus+Holding"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn--whatsapp"
-        >
-          <!-- Ícono WhatsApp SVG inline (sin dependencias) -->
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-          WhatsApp
-        </a>
-
-        <!--
-          Email — reemplazar la dirección:
-        -->
-        <a
-          href="mailto:contacto@magnusholding.co"
-          class="btn btn--secundario"
-        >
-          contacto@magnusholding.co
-        </a>
+  <!-- CONTACTO -->
+  <section class="S S-alt" id="contacto">
+    <div class="contenedor">
+      <div class="S-cab S-cab-c reveal">
+        <span class="tag" style="justify-content:center;">Hablemos</span>
+        <h2 class="S-h">Iniciar una <em>Conversaci&oacute;n</em></h2>
+        <p class="S-p" style="margin-inline:auto;text-align:center;">&#191;Tienes un proyecto en Boyac&aacute;, buscas una alianza estrat&eacute;gica o quieres conocer el sistema Magnus?</p>
       </div>
-
-      <!-- Datos adicionales de contacto -->
-      <div class="contacto__datos reveal reveal--d2">
-        <div class="dato">
-          <div class="dato__label">Ubicación</div>
-          <div class="dato__valor">Tunja, Boyacá</div>
+      <div class="con-g">
+        <div class="con-b reveal d1">
+          <div class="con-ti">WhatsApp directo</div>
+          <div class="con-va">Magnus Holding</div>
+          <div class="con-de">Respuesta directa. Sin intermediarios.</div>
+          <a href="https://wa.me/573000000000?text=Hola%2C+me+interesa+conocer+m%C3%A1s+sobre+Magnus+Holding" target="_blank" rel="noopener" class="btn btn-wa" style="width:fit-content;margin-top:.5rem;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Escribir ahora
+          </a>
         </div>
-        <div class="dato">
-          <div class="dato__label">Disponibilidad</div>
-          <div class="dato__valor">Lun – Sáb</div>
-        </div>
-        <div class="dato">
-          <div class="dato__label">Idioma</div>
-          <div class="dato__valor">Español</div>
+        <div class="con-b reveal d2">
+          <div class="con-ti">Correo electr&oacute;nico</div>
+          <div class="con-va" style="font-size:clamp(1rem,2.2vw,1.4rem);">contacto@magnusholding.co</div>
+          <div class="con-de">Para alianzas formales, propuestas y proyectos.</div>
+          <a href="mailto:contacto@magnusholding.co" class="btn btn-out" style="width:fit-content;margin-top:.5rem;">Enviar correo &rarr;</a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ===================================================
-       FOOTER
-  =================================================== -->
-  <footer class="footer">
-    <div class="contenedor footer__inner">
-      <span class="footer__logo">Magnus Holding</span>
-      <span class="footer__copy">© 2025 Magnus Holding. Tunja, Boyacá.</span>
-      <span class="footer__loc">Colombia · Todos los derechos reservados</span>
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="contenedor foot-in">
+      <div style="display:flex;align-items:center;gap:.6rem;">
+        <svg width="22" height="22" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="opacity:.28;">
+          <path d="M30 4 L52 14 L52 38 Q52 52 30 58 Q8 52 8 38 L8 14 Z" fill="none" stroke="#C9A84C" stroke-width="1.8"/>
+          <text x="30" y="36" font-family="serif" font-size="15" font-weight="700" fill="#C9A84C" text-anchor="middle">MH</text>
+        </svg>
+        <span class="foot-lt">Magnus <span>Holding</span></span>
+      </div>
+      <span class="foot-le">Renace &middot; Lidera &middot; Conquista</span>
+      <span class="foot-co">&copy; 2026 Magnus Holding &middot; Tunja, Boyac&aacute; &middot; Colombia</span>
     </div>
   </footer>
 
-  <!-- ===================================================
-       JAVASCRIPT — Scroll reveal (sin dependencias)
-  =================================================== -->
   <script>
-    // Intersection Observer para animaciones al hacer scroll
-    (function () {
-      const elementos = document.querySelectorAll('.reveal');
-
-      if (!('IntersectionObserver' in window)) {
-        // Fallback: mostrar todo si el browser no soporta IO
-        elementos.forEach(function (el) { el.classList.add('visible'); });
-        return;
-      }
-
-      const observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target); // solo una vez
-            }
-          });
-        },
-        { threshold: 0.12 }
-      );
-
-      elementos.forEach(function (el) { observer.observe(el); });
+    (function(){
+      var e=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){e.forEach(function(x){x.classList.add('visible');});return;}
+      var o=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');o.unobserve(en.target);}});},{threshold:.1});
+      e.forEach(function(x){o.observe(x);});
     })();
   </script>
-
 </body>
 </html>
